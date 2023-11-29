@@ -13,7 +13,6 @@
     /// </summary>
     public Person()
     {
-        Console.Clear();
         Console.Write("ПІБ: "); FullName = Console.ReadLine();
         Console.Write("Номер телефону: "); PhoneNumber = Console.ReadLine();
     }

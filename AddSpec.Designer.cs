@@ -40,65 +40,83 @@
             // label_FullName
             // 
             label_FullName.AutoSize = true;
-            label_FullName.Location = new Point(41, 34);
+            label_FullName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label_FullName.Location = new Point(54, 34);
             label_FullName.Name = "label_FullName";
-            label_FullName.Size = new Size(26, 15);
+            label_FullName.Size = new Size(28, 15);
             label_FullName.TabIndex = 0;
             label_FullName.Text = "ПІБ";
             // 
             // label_PhoneNumber
             // 
             label_PhoneNumber.AutoSize = true;
-            label_PhoneNumber.Location = new Point(41, 87);
+            label_PhoneNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label_PhoneNumber.Location = new Point(17, 78);
             label_PhoneNumber.Name = "label_PhoneNumber";
-            label_PhoneNumber.Size = new Size(101, 15);
+            label_PhoneNumber.Size = new Size(104, 15);
             label_PhoneNumber.TabIndex = 1;
             label_PhoneNumber.Text = "Номер телефону";
             // 
             // label_BranchName
             // 
             label_BranchName.AutoSize = true;
-            label_BranchName.Location = new Point(41, 142);
+            label_BranchName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label_BranchName.Location = new Point(26, 122);
             label_BranchName.Name = "label_BranchName";
-            label_BranchName.Size = new Size(83, 15);
+            label_BranchName.Size = new Size(85, 15);
             label_BranchName.TabIndex = 2;
             label_BranchName.Text = "Назва філіалу";
             // 
             // textBox_FullName
             // 
-            textBox_FullName.Location = new Point(215, 34);
+            textBox_FullName.BackColor = Color.DarkGray;
+            textBox_FullName.BorderStyle = BorderStyle.FixedSingle;
+            textBox_FullName.Location = new Point(160, 32);
             textBox_FullName.Name = "textBox_FullName";
             textBox_FullName.Size = new Size(100, 23);
             textBox_FullName.TabIndex = 3;
+            textBox_FullName.Tag = "";
+            textBox_FullName.TextAlign = HorizontalAlignment.Center;
             // 
             // textBox_PhoneNumber
             // 
-            textBox_PhoneNumber.Location = new Point(215, 87);
+            textBox_PhoneNumber.BackColor = Color.DarkGray;
+            textBox_PhoneNumber.BorderStyle = BorderStyle.FixedSingle;
+            textBox_PhoneNumber.Location = new Point(160, 76);
             textBox_PhoneNumber.Name = "textBox_PhoneNumber";
             textBox_PhoneNumber.Size = new Size(100, 23);
             textBox_PhoneNumber.TabIndex = 4;
+            textBox_PhoneNumber.TextAlign = HorizontalAlignment.Center;
             // 
             // textBox_BranchName
             // 
-            textBox_BranchName.Location = new Point(215, 139);
+            textBox_BranchName.BackColor = Color.DarkGray;
+            textBox_BranchName.BorderStyle = BorderStyle.FixedSingle;
+            textBox_BranchName.Location = new Point(160, 120);
             textBox_BranchName.Name = "textBox_BranchName";
             textBox_BranchName.Size = new Size(100, 23);
             textBox_BranchName.TabIndex = 5;
+            textBox_BranchName.TextAlign = HorizontalAlignment.Center;
             // 
             // button_addspec
             // 
-            button_addspec.Location = new Point(141, 184);
+            button_addspec.BackColor = Color.DarkGray;
+            button_addspec.FlatStyle = FlatStyle.Flat;
+            button_addspec.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_addspec.Location = new Point(96, 178);
             button_addspec.Name = "button_addspec";
-            button_addspec.Size = new Size(88, 40);
+            button_addspec.Size = new Size(88, 30);
             button_addspec.TabIndex = 6;
             button_addspec.Text = "Додати";
-            button_addspec.UseVisualStyleBackColor = true;
+            button_addspec.UseVisualStyleBackColor = false;
+            button_addspec.Click += button_addspec_Click;
             // 
             // AddSpec
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(361, 236);
+            BackColor = Color.Gray;
+            ClientSize = new Size(280, 230);
             Controls.Add(button_addspec);
             Controls.Add(textBox_BranchName);
             Controls.Add(textBox_PhoneNumber);

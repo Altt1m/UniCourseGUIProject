@@ -26,10 +26,10 @@
     /// <param name="fN">ПІБ</param>
     /// <param name="pNum">Номер телефону</param>
     /// <param name="addr">Адреса</param>
-    public Client(string fN, string pNum, string addr)
+    public Client(string fN, string pN, string addr)
     {
         FullName = fN;
-        PhoneNumber = pNum;
+        PhoneNumber = pN;
         Address = addr;
 
         clients.Add(this);

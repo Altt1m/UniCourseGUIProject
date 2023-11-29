@@ -2,7 +2,6 @@
 
 public class Specialist : Person // Майстер (наслідування від Person)
 {
-    // На одного майстра може приходитися лише одне замовлення, але на замовлення може декілька майстрів
     public string BranchName { get; set; } // Назва філіалу
     public bool IsFree { get; set; } = true;
 
@@ -45,7 +44,7 @@ public class Specialist : Person // Майстер (наслідування в�
     /// Повертає список доступних майстрів
     /// </summary>
     /// <returns>Список вільних майстрів</returns>
-    public static List<Specialist> GetSpecsList()
+    public static List<Specialist> GetAvailableSpecsList()
     {
         return availableSpecs;
     }
@@ -75,12 +74,11 @@ public class Specialist : Person // Майстер (наслідування в�
     /// <summary>
     /// Видаляє майстра зі списку доступних
     /// </summary>
-    /// <param name="specialist">Спеціаліст (об'єкт)</param>
-    public static void RemoveFromSpecsList(Specialist specialist)
+    public void RemoveFromSpecsList()
     {
-        if (availableSpecs.Contains(specialist))
+        if (availableSpecs.Contains(this))
         {
-            availableSpecs.Remove(specialist);
+            availableSpecs.Remove(this);
         }
     }
 

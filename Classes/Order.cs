@@ -72,6 +72,48 @@
         client.AddOrder(this);
     }
 
+    public Order(Specialist spec, Client client, string serviceType, string dName, string dVendor, string dos, int wPeriod, double cost) // Конструктор
+    {
+        spec.IsFree = false;
+        spec.RemoveFromSpecsList();
+        spec.SetAssignedOrder(this);
+
+        ClientInfo = client;
+        Address = ClientInfo.Address; // Адреса замовлення береться з адреси клієнта
+
+        ServiceType = serviceType;
+        if (ServiceType == "Встановлення")
+        {
+            installOrders.Add(this); // Якщо замовлення на встановлення
+        }
+        else if (ServiceType == "Ремонт")
+        {
+            repairOrders.Add(this); // Якщо замовлення на ремонт
+        }
+
+        DeviceName = dName;
+        DeviceVendor = dVendor;
+        DateOfStart = dos;
+        WorkPeriod = wPeriod;
+        Cost = cost;
+
+        OrderID = "ORD" + ++orderAmount;
+        if (client.OrderID != null) // Якщо вже є замовлення
+        {
+            client.OrderID = client.OrderID + ", " + this.OrderID;
+        }
+        else
+        {
+            client.OrderID = OrderID;
+        }
+
+        MessageBox.Show($"Замовлення {OrderID} успішно створено.", "Створено замовлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        orders.Add(this);
+        client.AddOrder(this);
+
+    }
+
     /// <summary>
     /// Додає спеціаліста до списку виконуючих замовлення
     /// </summary>
@@ -201,7 +243,6 @@
     /// <returns>Середня вартість замовлень</returns>
     public static double GetAverageOrderCost()
     {
-        Console.Clear();
         return orders.Average(o => o.Cost);
     }
 
