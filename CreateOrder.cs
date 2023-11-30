@@ -121,6 +121,16 @@ namespace Course_Project_GUI
             mainWin.UpdateAvailableSpecs();
 
             mainWin.OrdersListButtonEnabled = true;
+            mainWin.OpenRemoveOrderButtonEnabled = true;
+
+            if (serviceType == "Встановлення")
+            {
+                mainWin.InstallOrdersListButtonEnabled = true;
+            }
+            else
+            {
+                mainWin.RepairOrdersListButtonEnabled = true;
+            }
 
             if (!availableSpecs.Any()) 
             {

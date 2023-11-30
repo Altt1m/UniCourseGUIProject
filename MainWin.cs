@@ -40,7 +40,8 @@ namespace Course_Project_GUI
 
         private void button_OpenRemoveOrder_Click(object sender, EventArgs e)
         {
-
+            RemoveOrder removeOrder = new RemoveOrder();
+            removeOrder.Show();
         }
 
         public string AverageOrderCostLabelText
@@ -116,20 +117,40 @@ namespace Course_Project_GUI
             set { button_OpenCreateOrder.Enabled = value; }
         }
 
+        public bool OpenRemoveOrderButtonEnabled
+        {
+            get { return button_OpenRemoveOrder.Enabled; }
+            set { button_OpenRemoveOrder.Enabled = value; }
+        }
+
         public bool OrdersListButtonEnabled
         {
             get { return button_OrdersList.Enabled; }
             set { button_OrdersList.Enabled = value; }
         }
 
+        public bool InstallOrdersListButtonEnabled
+        {
+            get { return button_InstallOrdersList.Enabled; }
+            set { button_InstallOrdersList.Enabled = value; }
+        }
+
+        public bool RepairOrdersListButtonEnabled
+        {
+            get { return button_RepairOrdersList.Enabled; }
+            set { button_RepairOrdersList.Enabled = value; }
+        }
+
         private void button_InstallOrdersList_Click(object sender, EventArgs e)
         {
-
+            InstallOrdersList installOrdersList = new InstallOrdersList();
+            installOrdersList.Show();
         }
 
         private void button_RepairOrdersList_Click(object sender, EventArgs e)
         {
-
+            RepairOrdersList repairOrdersList = new RepairOrdersList();
+            repairOrdersList.Show();
         }
 
         private void button_ClientsByServiceType_Click(object sender, EventArgs e)

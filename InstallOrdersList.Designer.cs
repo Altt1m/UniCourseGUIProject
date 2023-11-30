@@ -1,6 +1,6 @@
 ﻿namespace Course_Project_GUI
 {
-    partial class OrdersList
+    partial class InstallOrdersList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listBox_Orders = new ListBox();
+            listBox_InstallOrders = new ListBox();
             SuspendLayout();
             // 
-            // listBox_Orders
+            // listBox_InstallOrders
             // 
-            listBox_Orders.FormattingEnabled = true;
-            listBox_Orders.ItemHeight = 15;
-            listBox_Orders.Location = new Point(9, 12);
-            listBox_Orders.Name = "listBox_Orders";
-            listBox_Orders.Size = new Size(393, 259);
-            listBox_Orders.TabIndex = 0;
-            listBox_Orders.MouseDoubleClick += listBox_MouseDoubleClick;
+            listBox_InstallOrders.FormattingEnabled = true;
+            listBox_InstallOrders.ItemHeight = 15;
+            listBox_InstallOrders.Location = new Point(9, 10);
+            listBox_InstallOrders.Name = "listBox_InstallOrders";
+            listBox_InstallOrders.Size = new Size(393, 259);
+            listBox_InstallOrders.TabIndex = 1;
+            listBox_InstallOrders.MouseDoubleClick += listBox_InstallOrders_MouseDoubleClick;
             // 
-            // OrdersList
+            // InstallOrdersList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
             ClientSize = new Size(411, 281);
-            Controls.Add(listBox_Orders);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "OrdersList";
-            Text = "Всі замовлення";
+            Controls.Add(listBox_InstallOrders);
+            Name = "InstallOrdersList";
+            Text = "InstallOrdersList";
             ResumeLayout(false);
         }
 
         #endregion
 
-        private ListBox listBox_Orders;
+        private ListBox listBox_InstallOrders;
     }
 }

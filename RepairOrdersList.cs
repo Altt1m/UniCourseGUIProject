@@ -10,25 +10,26 @@ using System.Windows.Forms;
 
 namespace Course_Project_GUI
 {
-    public partial class OrdersList : Form
+    public partial class RepairOrdersList : Form
     {
-        private List<Order> orders = Order.GetOrdersList();
-        public OrdersList()
+        private List<Order> repairOrders = Order.GetRepairOrdersList();
+        public RepairOrdersList()
         {
             InitializeComponent();
 
-            for (int i = 0; i < orders.Count; i++)
+            for (int i = 0; i < repairOrders.Count; i++)
             {
-                listBox_Orders.Items.Add($"№{i + 1}. ID: {orders[i].OrderID}. Замовник: {orders[i].ClientInfo.FullName}");
+                listBox_RepairOrders.Items.Add($"№{i + 1}. ID: {repairOrders[i].OrderID}. " +
+                    $"Замовник: {repairOrders[i].ClientInfo.FullName}");
             }
         }
 
-        private void listBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void listBox_RepairOrders_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int i = listBox_Orders.IndexFromPoint(e.Location);
+            int i = listBox_RepairOrders.IndexFromPoint(e.Location);
             if (i != ListBox.NoMatches)
             {
-                Order selectedOrder = orders[i];
+                Order selectedOrder = repairOrders[i];
                 MessageBox.Show($"№{i + 1}\n" +
                     $"ID: {selectedOrder.OrderID}\n" +
                     $"Майстер: {selectedOrder.MainSpecialist.FullName}\n" +
@@ -40,7 +41,7 @@ namespace Course_Project_GUI
                     $"Дата початку: {selectedOrder.DateOfStart}\n" +
                     $"Термін роботи (у днях): {selectedOrder.WorkPeriod}\n" +
                     $"Вартість {selectedOrder.Cost}\n",
-                    "Інформація про замовлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    "Замовлення на встановлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

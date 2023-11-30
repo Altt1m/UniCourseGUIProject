@@ -75,48 +75,18 @@
     /// 1. Список пристроїв для ремонту
     /// </summary>
     /// <returns>Список пристроїв на ремонт</returns>
-    public static List<Order> GetRepairOrders()
+    public static List<Order> GetRepairOrdersList()
     {
         return repairOrders;
-    }
-
-    /// <summary>
-    /// Виводить список замовлень на ремонт
-    /// </summary>
-    public static void ShowRepairOrdersList()
-    {
-        foreach (Order order in repairOrders)
-        {
-            order.Show();
-        }
-        if (!repairOrders.Any())
-        {
-            Console.WriteLine("Немає замовлень на ремонт.\n");
-        }
     }
 
     /// <summary>
     /// 2. Список пристроїв для встановлення
     /// </summary>
     /// <returns>Список замовлень на встановлення</returns>
-    public static List<Order> GetInstallOrders()
+    public static List<Order> GetInstallOrdersList()
     {
         return installOrders;
-    }
-
-    /// <summary>
-    /// Виводить список замовлень на встановлення
-    /// </summary>
-    public static void ShowInstallOrdersList()
-    {
-        foreach (Order order in installOrders)
-        {
-            order.Show();      
-        }
-        if (!installOrders.Any())
-        {
-            Console.WriteLine("Немає замовлень на встановлення.\n");
-        }
     }
 
     /// <summary>
