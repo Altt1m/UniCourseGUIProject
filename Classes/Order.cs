@@ -1,4 +1,4 @@
-﻿public class Order : IShow // Замовлення на ремонт та встановлення
+﻿public class Order // Замовлення на ремонт та встановлення
 {
     public string Address { get; set; } // Адреса (береться у клієнта)
     public string ServiceType { get; set; } // Тип послуги (Встановлення/Ремонт)
@@ -13,70 +13,18 @@
     private static List<Order> orders = new List<Order>(); // Список всіх замовлень
     private static List<Order> repairOrders = new List<Order>(); // Список замовлень на ремонт
     private static List<Order> installOrders = new List<Order>(); // Список замовлень на встановлення
-    private List<Specialist> specialists = new List<Specialist>(); // Список майстрів
 
     // Композиція
     public Specialist MainSpecialist { get; set; } // Головний майстер
     public Client ClientInfo { get; set; } // Інформація про клієнта (зокрема адреса)
 
-    /// <summary>
-    /// Конструктор з параметрами
-    /// </summary>
-    /// <param name="spec">Спеціаліст (об'єкт)</param>
-    /// <param name="client">Клієнт (об'єкт)</param>
-    /// <exception cref="Exception">Майстер зайнятий</exception>
-    public Order(Specialist spec, Client client) // Конструктор
-    {
-        if (spec.IsFree) // Якщо майстер вільний
-        {
-            MainSpecialist = spec; // ...то він і назначається
-            specialists.Add(spec);
-            spec.IsFree = false; // Майстер перестає бути вільним
-            spec.SetAssignedOrder(this); // Майстру приписується замовлення
-        }
-        else // Якщо ні
-        {
-            throw new Exception("Цей майстер наразі зайнятий."); // ...то видається помилка
-        }
-        ClientInfo = client;
-        Address = ClientInfo.Address; // Адреса замовлення береться з адреси клієнта
-        Console.Write("Вид послуги: "); ServiceType = Console.ReadLine();
-        if (ServiceType == "Встановлення")
-        {
-            installOrders.Add(this); // Якщо замовлення на встановлення
-        }
-        else if (ServiceType == "Ремонт")
-        {
-            repairOrders.Add(this); // Якщо замовлення на ремонт
-        }
-        Console.Write("Назва прибору: "); DeviceName = Console.ReadLine();
-        Console.Write("Виробник прибору: "); DeviceVendor = Console.ReadLine();
-        Console.Write("Дата початку: "); DateOfStart = Console.ReadLine();
-        Console.Write("Строк роботи (у днях): "); WorkPeriod = Int32.Parse(Console.ReadLine());
-        Console.Write("Вартість: "); Cost = Double.Parse(Console.ReadLine());
-
-        OrderID = "ORD" + ++orderAmount;
-        if (client.OrderID != null) // Якщо вже є замовлення
-        {
-            client.OrderID = client.OrderID + ", " + this.OrderID;
-        }
-        else
-        {
-            client.OrderID = OrderID;
-        }
-
-        Console.Clear();
-        Console.WriteLine($"Замовлення {OrderID} створено.\n");
-
-        orders.Add(this);
-        client.AddOrder(this);
-    }
-
+   
     public Order(Specialist spec, Client client, string serviceType, string dName, string dVendor, string dos, int wPeriod, double cost) // Конструктор
     {
         spec.IsFree = false;
         spec.RemoveFromSpecsList();
         spec.SetAssignedOrder(this);
+        MainSpecialist = spec;
 
         ClientInfo = client;
         Address = ClientInfo.Address; // Адреса замовлення береться з адреси клієнта
@@ -112,39 +60,6 @@
         orders.Add(this);
         client.AddOrder(this);
 
-    }
-
-    /// <summary>
-    /// Додає спеціаліста до списку виконуючих замовлення
-    /// </summary>
-    /// <param name="spec"></param>
-    public void AddSpecialist(Specialist spec)
-    {
-        if (spec.IsFree) // Якщо майстер вільний
-        {
-            specialists.Add(spec); // ...то він додається до списку
-            spec.IsFree = false; // Майстер перестає бути вільним
-            spec.SetAssignedOrder(this); // Майстру приписується замовлення
-        }
-        else // Якщо ні
-        {
-            throw new Exception("Цей майстер наразі зайнятий."); // ...то видається помилка
-        }
-    }
-
-    /// <summary>
-    /// Виводить інформацію про замовлення
-    /// </summary>
-    public void Show()
-    {
-        Console.WriteLine($"Адреса: {Address}\n" +
-                        $"Вид послуги: {ServiceType}\n" +
-                        $"Назва прибору: {DeviceName}\n" +
-                        $"Виробник прибору: {DeviceVendor}\n" +
-                        $"Дата початку: {DateOfStart}\n" +
-                        $"Строк роботи: {WorkPeriod}\n" +
-                        $"Вартість: {Cost}\n" +
-                        $"ID: {OrderID}\n");
     }
 
     /// <summary>

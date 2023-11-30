@@ -22,31 +22,25 @@ namespace Course_Project_GUI
 
         private void button_OpenAddSpec_Click(object sender, EventArgs e)
         {
-            AddSpec addSpec = new AddSpec();
+            AddSpec addSpec = new AddSpec(this);
             addSpec.Show();
         }
 
         private void button_OpenAddClient_Click(object sender, EventArgs e)
         {
-            AddClient addClient = new AddClient();
+            AddClient addClient = new AddClient(this);
             addClient.Show();
         }
 
         private void button_OpenCreateOrder_Click(object sender, EventArgs e)
         {
-            if (!Specialist.GetAvailableSpecsList().Any())
-            {
-                MessageBox.Show("Відсутні вільні майстри.", "Чогось не вистачає", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else if (!Client.GetClientsList().Any())
-            {
-                MessageBox.Show("Відсутні клієнти.", "Чогось не вистачає", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             createOrder = new CreateOrder(this);
             createOrder.Show();
+        }
+
+        private void button_OpenRemoveOrder_Click(object sender, EventArgs e)
+        {
+
         }
 
         public string AverageOrderCostLabelText
@@ -55,16 +49,77 @@ namespace Course_Project_GUI
             set { label_AverageOrderCost.Text = value; }
         }
 
+        public void UpdateAverageOrderCost()
+        {
+            AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()}";
+        }
+
         public string LongestWorkPeriodLabelText
         {
             get { return label_LongestWorkPeriod.Text; }
             set { label_LongestWorkPeriod.Text = value; }
+        }
+        public void UpdateLongestWorkPeriod()
+        {
+            LongestWorkPeriodLabelText = $"Найдовший термін виконання (у днях): {Order.GetLongestWorkPeriod()}";
         }
 
         public string MostExpensiveOrderLabelText
         {
             get { return label_MostExpensiveOrder.Text; }
             set { label_MostExpensiveOrder.Text = value; }
+        }
+
+        public void UpdateMostExpensiveOrder()
+        {
+            MostExpensiveOrderLabelText = $"Найдорожче замовлення: {Order.GetMostExpensiveOrder().OrderID} " +
+                                                                            $"({Order.GetMostExpensiveOrder().Cost} грн.)";
+        }
+
+        public string AvailableSpecsLabelText
+        {
+            get { return label_AvailableSpecs.Text; }
+            set { label_AvailableSpecs.Text = value; }
+        }
+
+        public void UpdateAvailableSpecs()
+        {
+            AvailableSpecsLabelText = $"Вільні майстри: {Specialist.GetAvailableSpecsList().Count}";
+        }
+
+        public string ClientsLabelText
+        {
+            get { return label_Clients.Text; }
+            set { label_Clients.Text = value; }
+        }
+
+        public void UpdateClients()
+        {
+            ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
+        }
+
+        public bool AllSpecsButtonEnabled
+        {
+            get { return button_AllSpecs.Enabled; }
+            set { button_AllSpecs.Enabled = value; }
+        }
+
+        public bool ClientsButtonEnabled
+        {
+            get { return button_Сlients.Enabled; }
+            set { button_Сlients.Enabled = value; }
+        }
+
+        public bool OpenCreateOrderButtonEnabled
+        {
+            get { return button_OpenCreateOrder.Enabled; }
+            set { button_OpenCreateOrder.Enabled = value; }
+        }
+
+        public bool OrdersListButtonEnabled
+        {
+            get { return button_OrdersList.Enabled; }
+            set { button_OrdersList.Enabled = value; }
         }
 
         private void button_InstallOrdersList_Click(object sender, EventArgs e)
@@ -80,5 +135,24 @@ namespace Course_Project_GUI
         private void button_ClientsByServiceType_Click(object sender, EventArgs e)
         {
         }
+
+        private void button_allspecs_Click(object sender, EventArgs e)
+        {
+            AllSpecsList allspecsList = new AllSpecsList();
+            allspecsList.Show();
+        }
+        private void button_clients_Click(object sender, EventArgs e)
+        {
+            ClientsList clientsList = new ClientsList();
+            clientsList.Show();
+        }
+
+        private void button_OrdersList_Click(object sender, EventArgs e)
+        {
+            OrdersList ordersList = new OrdersList();
+            ordersList.Show();
+        }
+
+
     }
 }

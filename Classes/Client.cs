@@ -75,8 +75,4 @@
         orders.Add(order);
     }
 
-    override public void Presentation()
-    {
-        Console.WriteLine($"Мене звати {FullName}. Я всього лише клієнт.\n");
-    }
 }

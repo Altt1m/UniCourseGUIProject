@@ -123,6 +123,8 @@
             Controls.Add(label_BranchName);
             Controls.Add(label_PhoneNumber);
             Controls.Add(label_FullName);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "AddClient";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Додати клієнта";

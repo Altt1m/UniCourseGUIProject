@@ -7,17 +7,7 @@ public class Specialist : Person // Майстер (наслідування в�
 
     private Order assignedOrder;
     private static List<Specialist> availableSpecs = new List<Specialist>(); // Статичний список майстрів
-
-    /// <summary>
-    /// Конструктор за замовчуванням
-    /// </summary>
-    public Specialist()
-    {
-        Console.Write("Назва філіалу: "); BranchName = Console.ReadLine();
-        Console.Clear();
-        Console.WriteLine($"Майстер {FullName} доданий.\n");
-        availableSpecs.Add(this);
-    }
+    private static List<Specialist> allSpecs = new List<Specialist>();
 
     /// <summary>
     /// Конструктор з параметрами
@@ -31,13 +21,8 @@ public class Specialist : Person // Майстер (наслідування в�
         PhoneNumber = pNum;
         BranchName = bN;
         availableSpecs.Add(this);
-    }
 
-    public void Show()
-    {
-        Console.WriteLine($"ПІБ: {FullName}\n" +
-                          $"Номер телефону: {PhoneNumber}\n" +
-                          $"Назва філіалу: {BranchName}\n");
+        allSpecs.Add(this);
     }
 
     /// <summary>
@@ -49,26 +34,9 @@ public class Specialist : Person // Майстер (наслідування в�
         return availableSpecs;
     }
 
-    /// <summary>
-    /// Виводить список доступних майстрів
-    /// </summary>
-    public static void ShowAvailableSpecsList()
+    public static List<Specialist> GetAllSpecsList()
     {
-        int index = 1;
-        foreach (Specialist spec in availableSpecs)
-        {
-            if (spec.IsFree)
-            {
-                Console.WriteLine($"Майстер №{index}");
-                spec.Show();
-                index++;
-            }
-        }
-        if (index == 1)
-        {
-            Console.Clear();
-            Console.WriteLine("Вільні майстри наразі відсутні, спробуйте додати нових.\n");
-        }
+        return allSpecs;
     }
 
     /// <summary>
@@ -90,12 +58,5 @@ public class Specialist : Person // Майстер (наслідування в�
     {
         assignedOrder = order;
     }
-
-    override public void Presentation()
-    {
-        Console.WriteLine($"Мене звати {FullName}. Я працюю майстром у {BranchName}.\n");
-    }
-
-    
 
 }

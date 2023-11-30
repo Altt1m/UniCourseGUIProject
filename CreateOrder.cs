@@ -50,33 +50,48 @@ namespace Course_Project_GUI
             if (string.IsNullOrWhiteSpace(textBox_DeviceName.Text))
             {
                 // Якщо текстове поле порожнє або містить лише пробіли
-                MessageBox.Show("Назва прибору відсутня або введена некоректно.");
+                MessageBox.Show("Назва прибору відсутня або введена некоректно.", "Назва прибору", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrWhiteSpace(textBox_DeviceVendor.Text))
             {
-                MessageBox.Show("Виробник прибору відсутній або введений некоректно.");
-                return;
-            }
-            else if (string.IsNullOrWhiteSpace(textBox_DateOfStart.Text))
-            {
-                MessageBox.Show("Дата початку відсутня або введена некоректно.");
+                MessageBox.Show("Виробник прибору відсутній або введений некоректно.", "Виробник пробору", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrWhiteSpace(textBox_WorkPeriod.Text))
             {
-                MessageBox.Show("Термін роботи відсутній або введений некоректно.");
+                MessageBox.Show("Термін роботи відсутній або введений некоректно.", "Термін роботи", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrWhiteSpace(textBox_Cost.Text))
             {
-                MessageBox.Show("Вартість відсутня або введена некоректно.");
+                MessageBox.Show("Вартість відсутня або введена некоректно.", "Вартість", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_DeviceName.Text.Length < 3 || textBox_DeviceName.Text.Length > 20)
+            {
+                MessageBox.Show("Назва прибору повинна містити від 3 до 20 символів.", "Назва прибору", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_DeviceVendor.Text.Length < 3 || textBox_DeviceVendor.Text.Length > 15)
+            {
+                MessageBox.Show("Назва виробника повинна мати від 3 до 15 символів.", "Виробник прибору", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_WorkPeriod.Text.Length > 2)
+            {
+                MessageBox.Show("Максимальний термін роботи 99 днів.", "Термін роботи", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_Cost.Text.Length > 5) // 99999
+            {
+                MessageBox.Show("Максимальна вартість 99999 грн.", "Вартість", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             string dName = textBox_DeviceName.Text;
             string dVendor = textBox_DeviceVendor.Text;
-            string dos = textBox_DateOfStart.Text;
+            string dos = dateTimePicker_DateOfStart.Text;
             int wPeriod;
             double cost;
             try
@@ -100,27 +115,36 @@ namespace Course_Project_GUI
 
 
             new Order(spec, client, serviceType, dName, dVendor, dos, wPeriod, cost);
-            UpdateAverageOrderCost();
-            UpdateLongestWorkPeriod();
-            UpdateMostExpensiveOrder();
+            mainWin.UpdateAverageOrderCost();
+            mainWin.UpdateLongestWorkPeriod();
+            mainWin.UpdateMostExpensiveOrder();
+            mainWin.UpdateAvailableSpecs();
+
+            mainWin.OrdersListButtonEnabled = true;
+
+            if (!availableSpecs.Any()) 
+            {
+                mainWin.OpenCreateOrderButtonEnabled = false;
+            }
 
             Close();
         }
 
-        private void UpdateAverageOrderCost()
+        private void button_ShowSpecInfo_Click(object sender, EventArgs e)
         {
-            mainWin.AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()}";
+            Specialist selectedSpec = (Specialist)comboBox_Specs.SelectedItem;
+            MessageBox.Show($"ПІБ: {selectedSpec.FullName}\n" +
+                          $"Номер телефону: {selectedSpec.PhoneNumber}\n" +
+                          $"Назва філіалу: {selectedSpec.BranchName}", "Інформація про майстра");
         }
 
-        private void UpdateLongestWorkPeriod()
+        private void button_ShowClientInfo_Click(object sender, EventArgs e)
         {
-            mainWin.LongestWorkPeriodLabelText = $"Найдовший термін виконання: {Order.GetLongestWorkPeriod()} годин";
-        }
-
-        private void UpdateMostExpensiveOrder()
-        {
-            mainWin.MostExpensiveOrderLabelText = $"Найдорожче замовлення: {Order.GetMostExpensiveOrder().OrderID}" +
-                                                                            $"({Order.GetMostExpensiveOrder().Cost})";
+            Client selectedClient = (Client)comboBox_Clients.SelectedItem;
+            MessageBox.Show($"ПІБ: {selectedClient.FullName}\n" +
+                        $"Номер телефону: {selectedClient.PhoneNumber}\n" +
+                        $"Адреса: {selectedClient.Address}\n" +
+                        $"ID замовлення: {selectedClient.OrderID}", "Інформація про клієнта");
         }
 
         //private void button_ShowSelectedSpec_Click(object sender, EventArgs e)
