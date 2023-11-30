@@ -2,7 +2,6 @@ namespace Course_Project_GUI
 {
     public partial class MainWin : Form
     {
-        private CreateOrder createOrder;
         public MainWin()
         {
             InitializeComponent();
@@ -34,13 +33,13 @@ namespace Course_Project_GUI
 
         private void button_OpenCreateOrder_Click(object sender, EventArgs e)
         {
-            createOrder = new CreateOrder(this);
+            CreateOrder createOrder = new CreateOrder(this);
             createOrder.Show();
         }
 
         private void button_OpenRemoveOrder_Click(object sender, EventArgs e)
         {
-            RemoveOrder removeOrder = new RemoveOrder();
+            RemoveOrder removeOrder = new RemoveOrder(this);
             removeOrder.Show();
         }
 
@@ -88,6 +87,12 @@ namespace Course_Project_GUI
             AvailableSpecsLabelText = $"Â³ëüí³ ìàéñòðè: {Specialist.GetAvailableSpecsList().Count}";
         }
 
+        public bool AllSpecsButtonEnabled
+        {
+            get { return button_AllSpecs.Enabled; }
+            set { button_AllSpecs.Enabled = value; }
+        }
+
         public string ClientsLabelText
         {
             get { return label_Clients.Text; }
@@ -99,16 +104,16 @@ namespace Course_Project_GUI
             ClientsLabelText = $"Êë³ºíòè: {Client.GetClientsList().Count}";
         }
 
-        public bool AllSpecsButtonEnabled
-        {
-            get { return button_AllSpecs.Enabled; }
-            set { button_AllSpecs.Enabled = value; }
-        }
-
         public bool ClientsButtonEnabled
         {
             get { return button_Ñlients.Enabled; }
             set { button_Ñlients.Enabled = value; }
+        }
+
+        public bool ClientsByServiceTypeButtonEnabled
+        {
+            get { return button_ClientsByServiceType.Enabled; }
+            set { button_ClientsByServiceType.Enabled = value; }
         }
 
         public bool OpenCreateOrderButtonEnabled
@@ -155,6 +160,8 @@ namespace Course_Project_GUI
 
         private void button_ClientsByServiceType_Click(object sender, EventArgs e)
         {
+            ClientsByServiceType clientsByServiceType = new ClientsByServiceType();
+            clientsByServiceType.Show();
         }
 
         private void button_allspecs_Click(object sender, EventArgs e)
@@ -174,6 +181,25 @@ namespace Course_Project_GUI
             ordersList.Show();
         }
 
+        private void label_MostExpensiveOrder_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label_LongestWorkPeriod_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label_AverageOrderCost_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label_Clients_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label_AvailableSpecs_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

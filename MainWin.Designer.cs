@@ -52,7 +52,7 @@
             button_OpenAddSpec.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_OpenAddSpec.Location = new Point(9, 17);
             button_OpenAddSpec.Name = "button_OpenAddSpec";
-            button_OpenAddSpec.Size = new Size(133, 40);
+            button_OpenAddSpec.Size = new Size(150, 40);
             button_OpenAddSpec.TabIndex = 0;
             button_OpenAddSpec.Text = "Додати майстра";
             button_OpenAddSpec.UseVisualStyleBackColor = false;
@@ -65,7 +65,7 @@
             button_OpenAddClient.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_OpenAddClient.Location = new Point(9, 63);
             button_OpenAddClient.Name = "button_OpenAddClient";
-            button_OpenAddClient.Size = new Size(134, 40);
+            button_OpenAddClient.Size = new Size(149, 40);
             button_OpenAddClient.TabIndex = 2;
             button_OpenAddClient.Text = "Додати клієнта";
             button_OpenAddClient.UseVisualStyleBackColor = false;
@@ -79,7 +79,7 @@
             button_OpenCreateOrder.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_OpenCreateOrder.Location = new Point(9, 121);
             button_OpenCreateOrder.Name = "button_OpenCreateOrder";
-            button_OpenCreateOrder.Size = new Size(133, 40);
+            button_OpenCreateOrder.Size = new Size(149, 40);
             button_OpenCreateOrder.TabIndex = 4;
             button_OpenCreateOrder.Text = "Створити замовлення";
             button_OpenCreateOrder.UseVisualStyleBackColor = false;
@@ -91,7 +91,7 @@
             button_RepairOrdersList.Enabled = false;
             button_RepairOrdersList.FlatStyle = FlatStyle.Flat;
             button_RepairOrdersList.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_RepairOrdersList.Location = new Point(148, 213);
+            button_RepairOrdersList.Location = new Point(164, 213);
             button_RepairOrdersList.Name = "button_RepairOrdersList";
             button_RepairOrdersList.Size = new Size(134, 40);
             button_RepairOrdersList.TabIndex = 9;
@@ -107,7 +107,7 @@
             button_InstallOrdersList.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_InstallOrdersList.Location = new Point(9, 213);
             button_InstallOrdersList.Name = "button_InstallOrdersList";
-            button_InstallOrdersList.Size = new Size(133, 40);
+            button_InstallOrdersList.Size = new Size(149, 40);
             button_InstallOrdersList.TabIndex = 8;
             button_InstallOrdersList.Text = "Список замовлень на встановлення";
             button_InstallOrdersList.UseVisualStyleBackColor = false;
@@ -119,7 +119,7 @@
             button_ClientsByServiceType.Enabled = false;
             button_ClientsByServiceType.FlatStyle = FlatStyle.Flat;
             button_ClientsByServiceType.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_ClientsByServiceType.Location = new Point(148, 167);
+            button_ClientsByServiceType.Location = new Point(164, 167);
             button_ClientsByServiceType.Name = "button_ClientsByServiceType";
             button_ClientsByServiceType.Size = new Size(134, 40);
             button_ClientsByServiceType.TabIndex = 7;
@@ -131,51 +131,56 @@
             // 
             label_AverageOrderCost.AutoSize = true;
             label_AverageOrderCost.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_AverageOrderCost.Location = new Point(299, 134);
+            label_AverageOrderCost.Location = new Point(315, 134);
             label_AverageOrderCost.Name = "label_AverageOrderCost";
             label_AverageOrderCost.Size = new Size(206, 15);
             label_AverageOrderCost.TabIndex = 10;
             label_AverageOrderCost.Text = "Середня вартість замовлення: N/A";
+            label_AverageOrderCost.Click += label_AverageOrderCost_Click;
             // 
             // label_LongestWorkPeriod
             // 
             label_LongestWorkPeriod.AutoSize = true;
             label_LongestWorkPeriod.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_LongestWorkPeriod.Location = new Point(299, 180);
+            label_LongestWorkPeriod.Location = new Point(315, 180);
             label_LongestWorkPeriod.Name = "label_LongestWorkPeriod";
             label_LongestWorkPeriod.Size = new Size(260, 15);
             label_LongestWorkPeriod.TabIndex = 11;
             label_LongestWorkPeriod.Text = "Найдовший термін виконання (у днях): N/A";
+            label_LongestWorkPeriod.Click += label_LongestWorkPeriod_Click;
             // 
             // label_MostExpensiveOrder
             // 
             label_MostExpensiveOrder.AutoSize = true;
             label_MostExpensiveOrder.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_MostExpensiveOrder.Location = new Point(299, 226);
+            label_MostExpensiveOrder.Location = new Point(315, 226);
             label_MostExpensiveOrder.Name = "label_MostExpensiveOrder";
             label_MostExpensiveOrder.Size = new Size(183, 15);
             label_MostExpensiveOrder.TabIndex = 12;
             label_MostExpensiveOrder.Text = "Найдорожче замовлення: N/A";
+            label_MostExpensiveOrder.Click += label_MostExpensiveOrder_Click;
             // 
             // label_AvailableSpecs
             // 
             label_AvailableSpecs.AutoSize = true;
             label_AvailableSpecs.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_AvailableSpecs.Location = new Point(299, 30);
+            label_AvailableSpecs.Location = new Point(315, 30);
             label_AvailableSpecs.Name = "label_AvailableSpecs";
             label_AvailableSpecs.Size = new Size(107, 15);
             label_AvailableSpecs.TabIndex = 13;
             label_AvailableSpecs.Text = "Вільні майстри: 0";
+            label_AvailableSpecs.Click += label_AvailableSpecs_Click;
             // 
             // label_Clients
             // 
             label_Clients.AutoSize = true;
             label_Clients.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Clients.Location = new Point(299, 76);
+            label_Clients.Location = new Point(315, 76);
             label_Clients.Name = "label_Clients";
             label_Clients.Size = new Size(64, 15);
             label_Clients.TabIndex = 14;
             label_Clients.Text = "Клієнти: 0";
+            label_Clients.Click += label_Clients_Click;
             // 
             // button_OrdersList
             // 
@@ -185,7 +190,7 @@
             button_OrdersList.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_OrdersList.Location = new Point(9, 167);
             button_OrdersList.Name = "button_OrdersList";
-            button_OrdersList.Size = new Size(133, 40);
+            button_OrdersList.Size = new Size(149, 40);
             button_OrdersList.TabIndex = 6;
             button_OrdersList.Text = "Всі замовлення";
             button_OrdersList.UseVisualStyleBackColor = false;
@@ -197,11 +202,11 @@
             button_OpenRemoveOrder.Enabled = false;
             button_OpenRemoveOrder.FlatStyle = FlatStyle.Flat;
             button_OpenRemoveOrder.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_OpenRemoveOrder.Location = new Point(148, 121);
+            button_OpenRemoveOrder.Location = new Point(164, 121);
             button_OpenRemoveOrder.Name = "button_OpenRemoveOrder";
             button_OpenRemoveOrder.Size = new Size(134, 40);
             button_OpenRemoveOrder.TabIndex = 5;
-            button_OpenRemoveOrder.Text = "Видалити замовлення";
+            button_OpenRemoveOrder.Text = "Прибрати замовлення";
             button_OpenRemoveOrder.UseVisualStyleBackColor = false;
             button_OpenRemoveOrder.Click += button_OpenRemoveOrder_Click;
             // 
@@ -211,7 +216,7 @@
             button_Сlients.Enabled = false;
             button_Сlients.FlatStyle = FlatStyle.Flat;
             button_Сlients.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_Сlients.Location = new Point(148, 63);
+            button_Сlients.Location = new Point(164, 63);
             button_Сlients.Name = "button_Сlients";
             button_Сlients.Size = new Size(134, 40);
             button_Сlients.TabIndex = 3;
@@ -225,7 +230,7 @@
             button_AllSpecs.Enabled = false;
             button_AllSpecs.FlatStyle = FlatStyle.Flat;
             button_AllSpecs.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_AllSpecs.Location = new Point(149, 17);
+            button_AllSpecs.Location = new Point(165, 17);
             button_AllSpecs.Name = "button_AllSpecs";
             button_AllSpecs.Size = new Size(133, 40);
             button_AllSpecs.TabIndex = 1;
@@ -238,7 +243,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            ClientSize = new Size(576, 270);
+            ClientSize = new Size(604, 270);
             Controls.Add(button_Сlients);
             Controls.Add(button_AllSpecs);
             Controls.Add(button_OpenRemoveOrder);

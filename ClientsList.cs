@@ -33,7 +33,7 @@ namespace Course_Project_GUI
                     $"ПІБ: {selectedClient.FullName}\n" +
                     $"Номер телефону: {selectedClient.PhoneNumber}\n" +
                     $"Адреса: {selectedClient.Address}\n" +
-                    $"ID замовлення: {selectedClient.OrderID}",
+                    $"ID замовлення: {selectedClient.GetOrders()}",
                     "Інформація про клієнта", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

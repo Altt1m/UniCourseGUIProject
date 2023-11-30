@@ -23,11 +23,12 @@
     {
         spec.IsFree = false;
         spec.RemoveFromSpecsList();
-        spec.SetAssignedOrder(this);
+        //spec.SetAssignedOrder(this);
         MainSpecialist = spec;
 
         ClientInfo = client;
         Address = ClientInfo.Address; // Адреса замовлення береться з адреси клієнта
+        client.AddOrder(this);
 
         ServiceType = serviceType;
         if (ServiceType == "Встановлення")
@@ -46,19 +47,18 @@
         Cost = cost;
 
         OrderID = "ORD" + ++orderAmount;
-        if (client.OrderID != null) // Якщо вже є замовлення
-        {
-            client.OrderID = client.OrderID + ", " + this.OrderID;
-        }
-        else
-        {
-            client.OrderID = OrderID;
-        }
+        //if (client.OrderID != null) // Якщо вже є замовлення
+        //{
+        //    client.OrderID = client.OrderID + ", " + OrderID;
+        //}
+        //else
+        //{
+        //    client.OrderID = OrderID;
+        //}
 
         MessageBox.Show($"Замовлення {OrderID} успішно створено.", "Створено замовлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         orders.Add(this);
-        client.AddOrder(this);
 
     }
 
@@ -102,25 +102,6 @@
             .Distinct() // Щоб уникнути дублікатів клієнтів
             .ToList();
     }
-
-    /// <summary>
-    /// Виводить список клієнтів, які обрали певний тип послуги
-    /// </summary>
-    /// <param name="serviceType"></param>
-    public static void ShowClientsByServiceTypeList(string serviceType)
-    {
-        List<Client> clients = GetClientsByServiceType(serviceType);
-        foreach (Client client in clients)
-        {
-            client.Show();
-        }
-        if (!clients.Any())
-        {
-            Console.Clear();
-            Console.WriteLine($"Не знайдено жодного клієнта з типом послуги \"{serviceType}\"\n");
-        }
-    }
-
 
     /// <summary>
     /// 4. Середня вартість замовлень

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Course_Project_GUI
 {
-        public partial class AddClient : Form
+    public partial class AddClient : Form
     {
         private MainWin mainWin;
         public AddClient(MainWin mainWin)

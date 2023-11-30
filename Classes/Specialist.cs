@@ -5,7 +5,7 @@ public class Specialist : Person // Майстер (наслідування в�
     public string BranchName { get; set; } // Назва філіалу
     public bool IsFree { get; set; } = true;
 
-    private Order assignedOrder;
+    //private Order assignedOrder;
     private static List<Specialist> availableSpecs = new List<Specialist>(); // Статичний список майстрів
     private static List<Specialist> allSpecs = new List<Specialist>();
 
@@ -54,9 +54,9 @@ public class Specialist : Person // Майстер (наслідування в�
     /// Приписує майстру замовлення
     /// </summary>
     /// <param name="order">Приписуване замовлення</param>
-    public void SetAssignedOrder(Order order)
-    {
-        assignedOrder = order;
-    }
+    //public void SetAssignedOrder(Order order)
+    //{
+    //    assignedOrder = order;
+    //}
 
 }

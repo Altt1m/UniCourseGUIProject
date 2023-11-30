@@ -35,9 +35,9 @@
             // 
             listBox_AllSpecs.FormattingEnabled = true;
             listBox_AllSpecs.ItemHeight = 15;
-            listBox_AllSpecs.Location = new Point(50, 25);
+            listBox_AllSpecs.Location = new Point(12, 14);
             listBox_AllSpecs.Name = "listBox_AllSpecs";
-            listBox_AllSpecs.Size = new Size(252, 169);
+            listBox_AllSpecs.Size = new Size(300, 244);
             listBox_AllSpecs.TabIndex = 0;
             listBox_AllSpecs.MouseDoubleClick += listBox_AllSpecs_MouseDoubleClick;
             // 
@@ -46,7 +46,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            ClientSize = new Size(375, 262);
+            ClientSize = new Size(324, 271);
             Controls.Add(listBox_AllSpecs);
             Name = "AllSpecsList";
             Text = "AllSpecsList";

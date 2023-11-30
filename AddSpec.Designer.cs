@@ -51,7 +51,7 @@
             // 
             label_PhoneNumber.AutoSize = true;
             label_PhoneNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_PhoneNumber.Location = new Point(17, 78);
+            label_PhoneNumber.Location = new Point(16, 80);
             label_PhoneNumber.Name = "label_PhoneNumber";
             label_PhoneNumber.Size = new Size(104, 15);
             label_PhoneNumber.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             label_BranchName.AutoSize = true;
             label_BranchName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label_BranchName.Location = new Point(26, 122);
+            label_BranchName.Location = new Point(26, 125);
             label_BranchName.Name = "label_BranchName";
             label_BranchName.Size = new Size(85, 15);
             label_BranchName.TabIndex = 2;
@@ -71,9 +71,9 @@
             // 
             textBox_FullName.BackColor = Color.DarkGray;
             textBox_FullName.BorderStyle = BorderStyle.FixedSingle;
-            textBox_FullName.Location = new Point(160, 32);
+            textBox_FullName.Location = new Point(159, 33);
             textBox_FullName.Name = "textBox_FullName";
-            textBox_FullName.Size = new Size(100, 23);
+            textBox_FullName.Size = new Size(154, 23);
             textBox_FullName.TabIndex = 3;
             textBox_FullName.Tag = "";
             textBox_FullName.TextAlign = HorizontalAlignment.Center;
@@ -82,9 +82,9 @@
             // 
             textBox_PhoneNumber.BackColor = Color.DarkGray;
             textBox_PhoneNumber.BorderStyle = BorderStyle.FixedSingle;
-            textBox_PhoneNumber.Location = new Point(160, 76);
+            textBox_PhoneNumber.Location = new Point(160, 78);
             textBox_PhoneNumber.Name = "textBox_PhoneNumber";
-            textBox_PhoneNumber.Size = new Size(100, 23);
+            textBox_PhoneNumber.Size = new Size(154, 23);
             textBox_PhoneNumber.TabIndex = 4;
             textBox_PhoneNumber.TextAlign = HorizontalAlignment.Center;
             // 
@@ -92,9 +92,9 @@
             // 
             textBox_BranchName.BackColor = Color.DarkGray;
             textBox_BranchName.BorderStyle = BorderStyle.FixedSingle;
-            textBox_BranchName.Location = new Point(160, 120);
+            textBox_BranchName.Location = new Point(160, 123);
             textBox_BranchName.Name = "textBox_BranchName";
-            textBox_BranchName.Size = new Size(100, 23);
+            textBox_BranchName.Size = new Size(154, 23);
             textBox_BranchName.TabIndex = 5;
             textBox_BranchName.TextAlign = HorizontalAlignment.Center;
             // 
@@ -103,7 +103,7 @@
             button_addspec.BackColor = Color.DarkGray;
             button_addspec.FlatStyle = FlatStyle.Flat;
             button_addspec.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_addspec.Location = new Point(96, 178);
+            button_addspec.Location = new Point(122, 179);
             button_addspec.Name = "button_addspec";
             button_addspec.Size = new Size(88, 30);
             button_addspec.TabIndex = 6;
@@ -116,7 +116,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            ClientSize = new Size(280, 230);
+            ClientSize = new Size(334, 231);
             Controls.Add(button_addspec);
             Controls.Add(textBox_BranchName);
             Controls.Add(textBox_PhoneNumber);

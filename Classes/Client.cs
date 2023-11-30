@@ -2,7 +2,7 @@
 {
     // На одного клієнта може приходитися багато замовлень, але на замовлення лише один клієнт
     public string Address { get; set; } // Адреса
-    public string OrderID { get; set; } // ID замовлення
+    //public string OrderID { get; set; } // ID замовлення
 
     private List<Order> orders = new List<Order>(); // Список замовлень клієнта
 
@@ -35,14 +35,6 @@
         clients.Add(this);
     }
 
-    public void Show()
-    {
-        Console.WriteLine($"ПІБ: {FullName}\n" +
-                        $"Номер телефону: {PhoneNumber}\n" +
-                        $"Адреса: {Address}\n" +
-                        $"ID замовлення: {OrderID}\n");
-    }
-
     /// <summary>
     /// Повертає список клієнтів
     /// </summary>
@@ -53,26 +45,38 @@
     }
 
     /// <summary>
-    /// Виводить список клієнтів
-    /// </summary>
-    public static void ShowClientsList()
-    {
-        int index = 1;
-        foreach (Client client in clients)
-        {
-            Console.WriteLine($"Клієнт №{index}");
-            client.Show();
-            index++;
-        }
-    }
-
-    /// <summary>
     /// Додавання замовлення до списку клієнта
     /// </summary>
     /// <param name="order">Замовлення клієнта</param>
     public void AddOrder(Order order)
     {
         orders.Add(order);
+    }
+
+    public List<Order> GetOrdersList()
+    {
+        return orders;
+    }
+
+    public string GetOrders()
+    {
+        if (!orders.Any()) 
+        {
+            return "N/A";
+        }
+        else if (orders.Count == 1)
+        {
+            return $"{orders[0].OrderID}";
+        }
+        else
+        {
+            string clientOrders = "";
+            foreach (Order order in orders)
+            {
+                clientOrders = clientOrders + ", " + order.OrderID;
+            }
+            return clientOrders;
+        }
     }
 
 }
