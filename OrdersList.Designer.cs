@@ -49,6 +49,7 @@
             ClientSize = new Size(411, 281);
             Controls.Add(listBox_Orders);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "OrdersList";
             Text = "Всі замовлення";
             ResumeLayout(false);

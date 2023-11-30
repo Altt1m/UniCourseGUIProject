@@ -69,7 +69,7 @@ namespace Course_Project_GUI
 
             mainWin.ClientsButtonEnabled = true;
 
-            if (mainWin.AllSpecsButtonEnabled)
+            if (Specialist.GetAvailableSpecsList().Any())
             {
                 mainWin.OpenCreateOrderButtonEnabled = true;
             }

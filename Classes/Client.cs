@@ -60,7 +60,7 @@
 
     public string GetOrders()
     {
-        if (!orders.Any()) 
+        if (!orders.Any())
         {
             return "N/A";
         }
@@ -70,10 +70,10 @@
         }
         else
         {
-            string clientOrders = "";
-            foreach (Order order in orders)
+            string clientOrders = orders[0].OrderID;
+            for (int i = 1; i < orders.Count; i++)
             {
-                clientOrders = clientOrders + ", " + order.OrderID;
+                clientOrders = clientOrders + ", " + orders[i].OrderID;
             }
             return clientOrders;
         }

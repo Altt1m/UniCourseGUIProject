@@ -48,6 +48,8 @@
             BackColor = Color.Gray;
             ClientSize = new Size(411, 281);
             Controls.Add(listBox_InstallOrders);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "InstallOrdersList";
             Text = "InstallOrdersList";
             ResumeLayout(false);

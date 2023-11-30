@@ -48,6 +48,8 @@
             BackColor = Color.Gray;
             ClientSize = new Size(324, 271);
             Controls.Add(listBox_Clients);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "ClientsList";
             Text = "Клієнти";
             ResumeLayout(false);

@@ -39,7 +39,7 @@ namespace Course_Project_GUI
                     $"Виробник прибору: {selectedOrder.DeviceVendor}\n" +
                     $"Дата початку: {selectedOrder.DateOfStart}\n" +
                     $"Термін роботи (у днях): {selectedOrder.WorkPeriod}\n" +
-                    $"Вартість {selectedOrder.Cost}\n",
+                    $"Вартість: {selectedOrder.Cost} грн.\n",
                     "Інформація про замовлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

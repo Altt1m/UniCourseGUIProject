@@ -46,7 +46,8 @@
         WorkPeriod = wPeriod;
         Cost = cost;
 
-        OrderID = "ORD" + ++orderAmount;
+        orderAmount++;
+        OrderID = "ORD" + orderAmount;
         //if (client.OrderID != null) // Якщо вже є замовлення
         //{
         //    client.OrderID = client.OrderID + ", " + OrderID;
