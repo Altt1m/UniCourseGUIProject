@@ -136,7 +136,6 @@
             label_AverageOrderCost.Size = new Size(206, 15);
             label_AverageOrderCost.TabIndex = 10;
             label_AverageOrderCost.Text = "Середня вартість замовлення: N/A";
-            label_AverageOrderCost.Click += label_AverageOrderCost_Click;
             // 
             // label_LongestWorkPeriod
             // 
@@ -147,7 +146,6 @@
             label_LongestWorkPeriod.Size = new Size(260, 15);
             label_LongestWorkPeriod.TabIndex = 11;
             label_LongestWorkPeriod.Text = "Найдовший термін виконання (у днях): N/A";
-            label_LongestWorkPeriod.Click += label_LongestWorkPeriod_Click;
             // 
             // label_MostExpensiveOrder
             // 
@@ -158,7 +156,6 @@
             label_MostExpensiveOrder.Size = new Size(183, 15);
             label_MostExpensiveOrder.TabIndex = 12;
             label_MostExpensiveOrder.Text = "Найдорожче замовлення: N/A";
-            label_MostExpensiveOrder.Click += label_MostExpensiveOrder_Click;
             // 
             // label_AvailableSpecs
             // 
@@ -166,10 +163,9 @@
             label_AvailableSpecs.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label_AvailableSpecs.Location = new Point(315, 30);
             label_AvailableSpecs.Name = "label_AvailableSpecs";
-            label_AvailableSpecs.Size = new Size(107, 15);
+            label_AvailableSpecs.Size = new Size(122, 15);
             label_AvailableSpecs.TabIndex = 13;
-            label_AvailableSpecs.Text = "Вільні майстри: 0";
-            label_AvailableSpecs.Click += label_AvailableSpecs_Click;
+            label_AvailableSpecs.Text = "Вільні майстри: N/A";
             // 
             // label_Clients
             // 
@@ -180,7 +176,6 @@
             label_Clients.Size = new Size(64, 15);
             label_Clients.TabIndex = 14;
             label_Clients.Text = "Клієнти: 0";
-            label_Clients.Click += label_Clients_Click;
             // 
             // button_OrdersList
             // 
@@ -243,7 +238,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            ClientSize = new Size(604, 270);
+            ClientSize = new Size(616, 270);
             Controls.Add(button_Сlients);
             Controls.Add(button_AllSpecs);
             Controls.Add(button_OpenRemoveOrder);

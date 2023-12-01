@@ -29,7 +29,7 @@ namespace Course_Project_GUI
             // Додавання нових елементів
             foreach (Order order in orders)
             {
-                listBox_OrdersToRemove.Items.Add($"ID: {order.OrderID}, Майстер: {order.MainSpecialist.FullName}, Замовник: {order.ClientInfo.FullName}");
+                listBox_OrdersToRemove.Items.Add($"ID: {order.OrderID}. Замовник: {order.ClientInfo.FullName}");
             }
         }
 
@@ -55,15 +55,53 @@ namespace Course_Project_GUI
                 if (result == DialogResult.Yes)
                 {
                     // Код для обробки натискання на Yes
-                    Order.GetOrdersList().Remove(selectedOrder);
-                    Order.GetRepairOrdersList().Remove(selectedOrder);
-                    Order.GetInstallOrdersList().Remove(selectedOrder);
-
-                    selectedOrder.MainSpecialist.IsFree = true;
-                    Specialist.GetAvailableSpecsList().Add(selectedOrder.MainSpecialist);
+                    Specialist.AddAvailableSpec(selectedOrder.MainSpecialist);
+                    List<Specialist> allSpecs = Specialist.GetAllSpecsList();
+                    for (i = 0; i < allSpecs.Count; i++)
+                    {
+                        if (allSpecs[i].OrderID == selectedOrder.OrderID)
+                        {
+                            allSpecs[i].IsFree = true;
+                            break;
+                        }
+                    }
                     mainWin.OpenCreateOrderButtonEnabled = true;
 
-                    selectedOrder.ClientInfo.GetOrdersList().Remove(selectedOrder);
+                    bool removed = false;
+                    foreach (Client client in Client.GetClientsList())
+                    {
+                        foreach (Order order in client.GetOrdersList())
+                        {
+                            if (order.OrderID == selectedOrder.OrderID)
+                            {
+                                client.RemoveOrder(selectedOrder);
+                                removed = true;
+                                break;
+                            }
+                        }
+                        if (removed)
+                            break;
+                    }
+
+                    Order.GetOrdersList().Remove(selectedOrder);
+                    foreach (Order order in Order.GetRepairOrdersList())
+                    {
+                        if (order.OrderID == selectedOrder.OrderID)
+                        {
+                            Order.GetRepairOrdersList().Remove(order);
+                            break;
+                        }
+                    }
+                    foreach (Order order in Order.GetInstallOrdersList())
+                    {
+                        if (order.OrderID == selectedOrder.OrderID)
+                        {
+                            Order.GetInstallOrdersList().Remove(order);
+                            break;
+                        }
+                    }
+
+                    Order.OrdersRemoved++;
 
                     // Оновлення відображення ListBox або інших елементів
                     UpdateListBox();

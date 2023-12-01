@@ -54,7 +54,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(45, 33);
+            label1.Location = new Point(51, 33);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
             label1.TabIndex = 0;
@@ -64,7 +64,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(52, 73);
+            label2.Location = new Point(58, 73);
             label2.Name = "label2";
             label2.Size = new Size(46, 15);
             label2.TabIndex = 1;
@@ -94,7 +94,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(36, 126);
+            label3.Location = new Point(42, 126);
             label3.Name = "label3";
             label3.Size = new Size(79, 15);
             label3.TabIndex = 4;
@@ -104,7 +104,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(29, 175);
+            label4.Location = new Point(35, 175);
             label4.Name = "label4";
             label4.Size = new Size(93, 15);
             label4.TabIndex = 5;
@@ -114,7 +114,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(16, 209);
+            label5.Location = new Point(22, 209);
             label5.Name = "label5";
             label5.Size = new Size(118, 15);
             label5.TabIndex = 6;
@@ -124,7 +124,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(35, 243);
+            label6.Location = new Point(41, 243);
             label6.Name = "label6";
             label6.Size = new Size(81, 15);
             label6.TabIndex = 7;
@@ -134,7 +134,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(48, 309);
+            label7.Location = new Point(54, 309);
             label7.Name = "label7";
             label7.Size = new Size(54, 15);
             label7.TabIndex = 8;
@@ -220,11 +220,11 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(30, 276);
+            label8.Location = new Point(12, 276);
             label8.Name = "label8";
-            label8.Size = new Size(90, 15);
+            label8.Size = new Size(138, 15);
             label8.TabIndex = 18;
-            label8.Text = "Термін роботи";
+            label8.Text = "Термін роботи (у днях)";
             // 
             // button_ShowSpecInfo
             // 

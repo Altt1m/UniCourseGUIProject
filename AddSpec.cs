@@ -28,16 +28,6 @@ namespace Course_Project_GUI
                 MessageBox.Show("ПІБ відсутнє або введено некоректно.", "ПІБ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrWhiteSpace(textBox_PhoneNumber.Text))
-            {
-                MessageBox.Show("Номер телефону відсутній або введений некоректно.", "Номер телефону", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (string.IsNullOrWhiteSpace(textBox_BranchName.Text))
-            {
-                MessageBox.Show("Назва філіалу відсутня або введена некоректно.", "Назва філіалу", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             else if (textBox_FullName.Text.Split(" ").Length != 3)
             {
                 MessageBox.Show("ПІБ складається з трьох слів через пробіл.", "ПІБ", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -48,9 +38,29 @@ namespace Course_Project_GUI
                 MessageBox.Show("Задовге ПІБ. (>40)", "ПІБ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            foreach (Specialist spec in Specialist.GetAllSpecsList())
+            {
+                if (textBox_FullName.Text == spec.FullName)
+                {
+                    MessageBox.Show("Майстер з таким ім'ям вже є у системі", "ПІБ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox_PhoneNumber.Text))
+            {
+                MessageBox.Show("Номер телефону відсутній або введений некоректно.", "Номер телефону", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             else if (!Regex.IsMatch(textBox_PhoneNumber.Text, @"^\+\d{12}$")) // +380000000001
             {
                 MessageBox.Show("Номер телефону не відповідає міжнародному формату.", "Номер телефону", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBox_BranchName.Text))
+            {
+                MessageBox.Show("Назва філіалу відсутня або введена некоректно.", "Назва філіалу", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (textBox_BranchName.Text.Length < 3 || textBox_BranchName.Text.Length > 15)

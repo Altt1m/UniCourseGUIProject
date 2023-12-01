@@ -4,21 +4,13 @@
     public string Address { get; set; } // Адреса
     //public string OrderID { get; set; } // ID замовлення
 
+    public static int ClientsCreated { get; set; } = 0;
+
     private List<Order> orders = new List<Order>(); // Список замовлень клієнта
 
     private static List<Client> clients = new List<Client>(); // Список клієнтів
 
-    /// <summary>
-    /// Конструктор за замовчуванням
-    /// </summary>
-    public Client()
-    {
-        Console.Write("Адреса: "); Address = Console.ReadLine();
-        Console.Clear();
-        Console.WriteLine($"Клієнт {FullName} доданий.\n");
-
-        clients.Add(this);
-    }
+    public Client() { }
 
     /// <summary>
     /// Конструктор з параметрами
@@ -33,6 +25,7 @@
         Address = addr;
 
         clients.Add(this);
+        ClientsCreated++;
     }
 
     /// <summary>
@@ -44,6 +37,11 @@
         return clients;
     }
 
+    public static void SetClientsList(List<Client> clientsList)
+    {
+        clients = clientsList;
+    }
+
     /// <summary>
     /// Додавання замовлення до списку клієнта
     /// </summary>
@@ -51,6 +49,11 @@
     public void AddOrder(Order order)
     {
         orders.Add(order);
+    }
+
+    public void RemoveOrder(Order order)
+    {
+        orders.Remove(order);
     }
 
     public List<Order> GetOrdersList()

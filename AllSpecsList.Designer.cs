@@ -52,7 +52,7 @@
             MaximizeBox = false;
             Name = "AllSpecsList";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AllSpecsList";
+            Text = "Всі майстри";
             ResumeLayout(false);
         }
 

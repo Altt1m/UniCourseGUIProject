@@ -154,7 +154,7 @@ namespace Course_Project_GUI
                 mainWin.RepairOrdersListButtonEnabled = true;
             }
 
-            if (!availableSpecs.Any()) 
+            if (!availableSpecs.Any())
             {
                 mainWin.OpenCreateOrderButtonEnabled = false;
             }

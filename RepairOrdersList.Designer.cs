@@ -50,7 +50,7 @@
             Controls.Add(listBox_RepairOrders);
             Name = "RepairOrdersList";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "RepairOrdersList";
+            Text = "Список замовлень на ремонт";
             ResumeLayout(false);
         }
 

@@ -93,7 +93,7 @@
             MaximizeBox = false;
             Name = "ClientsByServiceType";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ClientsByServiceType";
+            Text = "Клієнти за типом послуги";
             ResumeLayout(false);
             PerformLayout();
         }

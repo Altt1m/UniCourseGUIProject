@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Course_Project_GUI;
+using System;
 
 public class Specialist : Person // Майстер (наслідування від Person)
 {
     public string BranchName { get; set; } // Назва філіалу
     public bool IsFree { get; set; } = true;
+    public static int SpecsCreated { get; set; } = 0;
+    public string OrderID { get; set; } = "N/A";
 
-    //private Order assignedOrder;
     private static List<Specialist> availableSpecs = new List<Specialist>(); // Статичний список майстрів
     private static List<Specialist> allSpecs = new List<Specialist>();
 
@@ -20,9 +22,18 @@ public class Specialist : Person // Майстер (наслідування в�
         FullName = fN;
         PhoneNumber = pNum;
         BranchName = bN;
-        availableSpecs.Add(this);
 
+        availableSpecs.Add(this);
         allSpecs.Add(this);
+
+        SpecsCreated++;
+    }
+
+    public Specialist() { }
+
+    public static void AddAvailableSpec(Specialist spec)
+    {
+        availableSpecs.Add(spec);
     }
 
     /// <summary>
@@ -34,9 +45,19 @@ public class Specialist : Person // Майстер (наслідування в�
         return availableSpecs;
     }
 
+    public static void SetAvailableSpecsList(List<Specialist> avalSpecs)
+    {
+        availableSpecs = avalSpecs;
+    }
+
     public static List<Specialist> GetAllSpecsList()
     {
         return allSpecs;
+    }
+
+    public static void SetAllSpecsList(List<Specialist> specs)
+    {
+        allSpecs = specs;
     }
 
     /// <summary>

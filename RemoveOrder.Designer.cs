@@ -48,9 +48,11 @@
             BackColor = Color.Gray;
             ClientSize = new Size(411, 281);
             Controls.Add(listBox_OrdersToRemove);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "RemoveOrder";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "RemoveOrder";
+            Text = "Прибрати замовлення";
             ResumeLayout(false);
         }
 

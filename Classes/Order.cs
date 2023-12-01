@@ -9,7 +9,10 @@
     public double Cost { get; set; } // Вартість
     public string OrderID { get; set; } // ID замовлення *(у клієнта)
 
-    private static int orderAmount = 0; // Номер замовлення (потім використовується)
+    public static int OrderAmount { get; set; } = 0; // Номер замовлення (потім використовується)
+    public static int OrdersCreated { get; set; } = 0;
+    public static int OrdersRemoved { get; set; } = 0;
+
     private static List<Order> orders = new List<Order>(); // Список всіх замовлень
     private static List<Order> repairOrders = new List<Order>(); // Список замовлень на ремонт
     private static List<Order> installOrders = new List<Order>(); // Список замовлень на встановлення
@@ -21,9 +24,12 @@
    
     public Order(Specialist spec, Client client, string serviceType, string dName, string dVendor, string dos, int wPeriod, double cost) // Конструктор
     {
+        OrderAmount++;
+        OrderID = "ORD" + OrderAmount;
+
         spec.IsFree = false;
         spec.RemoveFromSpecsList();
-        //spec.SetAssignedOrder(this);
+        spec.OrderID = OrderID;
         MainSpecialist = spec;
 
         ClientInfo = client;
@@ -46,22 +52,13 @@
         WorkPeriod = wPeriod;
         Cost = cost;
 
-        orderAmount++;
-        OrderID = "ORD" + orderAmount;
-        //if (client.OrderID != null) // Якщо вже є замовлення
-        //{
-        //    client.OrderID = client.OrderID + ", " + OrderID;
-        //}
-        //else
-        //{
-        //    client.OrderID = OrderID;
-        //}
-
         MessageBox.Show($"Замовлення {OrderID} успішно створено.", "Створено замовлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         orders.Add(this);
-
+        OrdersCreated++;
     }
+
+    public Order() { }
 
     /// <summary>
     /// Повератє список замовлень
@@ -70,6 +67,11 @@
     public static List<Order> GetOrdersList()
     {
         return orders;
+    }
+
+    public static void SetOrdersList(List<Order> ordersList)
+    {
+        orders = ordersList;
     }
 
     /// <summary>
@@ -81,6 +83,11 @@
         return repairOrders;
     }
 
+    public static void SetRepairOrdersList(List<Order> repairOrdersList)
+    {
+        repairOrders = repairOrdersList;
+    }
+
     /// <summary>
     /// 2. Список пристроїв для встановлення
     /// </summary>
@@ -88,6 +95,11 @@
     public static List<Order> GetInstallOrdersList()
     {
         return installOrders;
+    }
+
+    public static void SetInstallOrdersList(List<Order> installOrdersList)
+    {
+        installOrders = installOrdersList;
     }
 
     /// <summary>

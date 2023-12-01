@@ -3,13 +3,11 @@
     public string FullName { get; set; } // ПІБ
     public string PhoneNumber { get; set; } // Номер телефону
 
-    /// <summary>
-    /// Конструктор за замовчуванням
-    /// </summary>
-    public Person()
+    public Person(string fullName, string phoneNumber)
     {
-        Console.Write("ПІБ: "); FullName = Console.ReadLine();
-        Console.Write("Номер телефону: "); PhoneNumber = Console.ReadLine();
+        FullName = fullName;
+        PhoneNumber = phoneNumber;
     }
 
+    public Person() { }
 }

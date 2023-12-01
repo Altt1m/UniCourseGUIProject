@@ -1,3 +1,7 @@
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace Course_Project_GUI
 {
     public partial class MainWin : Form
@@ -5,6 +9,8 @@ namespace Course_Project_GUI
         public MainWin()
         {
             InitializeComponent();
+            LoadData();
+            FormClosing += MainWin_FormClosing;
         }
 
         private void MainWin_Load(object sender, EventArgs e)
@@ -181,25 +187,161 @@ namespace Course_Project_GUI
             ordersList.Show();
         }
 
-        private void label_MostExpensiveOrder_Click(object sender, EventArgs e)
+        private void MainWin_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Specialist.SpecsCreated > 0 || Client.ClientsCreated > 0 || Order.OrdersCreated > 0 || Order.OrdersRemoved > 0)
+            {
+                // Перевіряємо, чи користувач бажає зберегти дані
+                DialogResult result = MessageBox.Show("Бажаєте зберегти зміни перед закриттям?", "Збереження змін",
+                                                      MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Зберігаємо дані перед закриттям
+                    SaveData();
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    // Скасовуємо закриття форми
+                    e.Cancel = true;
+                }
+
+            }
 
         }
 
-        private void label_LongestWorkPeriod_Click(object sender, EventArgs e)
+        private void SaveData()
         {
+            if (!Directory.Exists("Files"))
+            {
+                // Створення папки, якщо вона не існує
+                Directory.CreateDirectory("Files");
+            }
+
+            string json = JsonSerializer.Serialize(Specialist.GetAllSpecsList());
+            File.WriteAllText("Files\\specsList.json", json);
+
+            json = JsonSerializer.Serialize(Specialist.GetAvailableSpecsList());
+            File.WriteAllText("Files\\availableSpecsList.json", json);
+
+            json = JsonSerializer.Serialize(Client.GetClientsList());
+            File.WriteAllText("Files\\clientsList.json", json);
+
+            int ordersAmount = Order.OrderAmount;
+            json = JsonSerializer.Serialize(ordersAmount);
+            File.WriteAllText("Files\\ordersAmount.json", json);
+
+            json = JsonSerializer.Serialize(Order.GetOrdersList());
+            File.WriteAllText("Files\\ordersList.json", json);
+
+            json = JsonSerializer.Serialize(Order.GetInstallOrdersList());
+            File.WriteAllText("Files\\installOrdersList.json", json);
+
+            json = JsonSerializer.Serialize(Order.GetRepairOrdersList());
+            File.WriteAllText("Files\\repairOrdersList.json", json);
         }
 
-        private void label_AverageOrderCost_Click(object sender, EventArgs e)
+        private void LoadData()
         {
+            if (File.Exists("Files\\specsList.json"))
+            {
+                string json = File.ReadAllText("Files\\specsList.json");
+                List<Specialist> specialists = JsonSerializer.Deserialize<List<Specialist>>(json);
+                Specialist.SetAllSpecsList(specialists);
+                if (Specialist.GetAllSpecsList().Any())
+                {
+                    AllSpecsButtonEnabled = true;
+                }
+
+            }
+
+            if (File.Exists("Files\\availableSpecsList.json"))
+            {
+                string json = File.ReadAllText("Files\\availableSpecsList.json");
+                List<Specialist> avalSpecs = JsonSerializer.Deserialize<List<Specialist>>(json);
+                Specialist.SetAvailableSpecsList(avalSpecs);
+                if (Specialist.GetAvailableSpecsList().Any())
+                {
+                    AvailableSpecsLabelText = $"Вільні майстри: {Specialist.GetAvailableSpecsList().Count}";
+                }
+                else
+                {
+                    AvailableSpecsLabelText = "Вільні майстри: 0";
+                }
+
+            }
+
+            if (File.Exists("Files\\clientsList.json"))
+            {
+                string json = File.ReadAllText("Files\\clientsList.json");
+                List<Client> clients = JsonSerializer.Deserialize<List<Client>>(json);
+                Client.SetClientsList(clients);
+                if (Client.GetClientsList().Any())
+                {
+                    ClientsButtonEnabled = true;
+                    ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
+                }
+
+            }
+
+            if (File.Exists("Files\\ordersAmount.json"))
+            {
+                string json = File.ReadAllText("Files\\ordersAmount.json");
+                int ordersAmount = JsonSerializer.Deserialize<int>(json);
+                Order.OrderAmount = ordersAmount;
+            }
+
+            if (File.Exists("Files\\ordersList.json"))
+            {
+                string json = File.ReadAllText("Files\\ordersList.json");
+                List<Order> orders = JsonSerializer.Deserialize<List<Order>>(json);
+                Order.SetOrdersList(orders);
+                if (Order.GetOrdersList().Any())
+                {
+                    OrdersListButtonEnabled = true;
+                    ClientsByServiceTypeButtonEnabled = true;
+                    OpenRemoveOrderButtonEnabled = true;
+                    UpdateAverageOrderCost();
+                    UpdateLongestWorkPeriod();
+                    UpdateMostExpensiveOrder();
+                }
+                foreach (Order order in Order.GetOrdersList())
+                {
+                    foreach (Client client in Client.GetClientsList())
+                    {
+                        if (order.ClientInfo.FullName == client.FullName)
+                        {
+                            client.AddOrder(order);
+                        }
+                    }
+                }
+
+            }
+
+            if (File.Exists("Files\\installOrdersList.json"))
+            {
+                string json = File.ReadAllText("Files\\installOrdersList.json");
+                List<Order> installOrders = JsonSerializer.Deserialize<List<Order>>(json);
+                Order.SetInstallOrdersList(installOrders);
+                if (Order.GetInstallOrdersList().Any())
+                {
+                    InstallOrdersListButtonEnabled = true;
+                }
+            }
+
+            if (File.Exists("Files\\repairOrdersList.json"))
+            {
+                string json = File.ReadAllText("Files\\repairOrdersList.json");
+                List<Order> repairOrders = JsonSerializer.Deserialize<List<Order>>(json);
+                Order.SetRepairOrdersList(repairOrders);
+                if (Order.GetRepairOrdersList().Any())
+                {
+                    RepairOrdersListButtonEnabled = true;
+                }
+
+            }
         }
 
-        private void label_Clients_Click(object sender, EventArgs e)
-        {
-        }
 
-        private void label_AvailableSpecs_Click(object sender, EventArgs e)
-        {
-        }
     }
 }
