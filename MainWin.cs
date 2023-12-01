@@ -51,7 +51,7 @@ namespace Course_Project_GUI
 
         public void UpdateAverageOrderCost()
         {
-            AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()}";
+            AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()} грн.";
         }
 
         public string LongestWorkPeriodLabelText

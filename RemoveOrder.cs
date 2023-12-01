@@ -81,22 +81,22 @@ namespace Course_Project_GUI
                         mainWin.LongestWorkPeriodLabelText = "Найдовший термін виконання (у днях): N/A";
                         mainWin.MostExpensiveOrderLabelText = "Найдорожче замовлення: N/A";
                     }
-                    
+
                 }
             }
 
-            if (!orders.Any()) 
+            if (!orders.Any())
             {
                 mainWin.OpenRemoveOrderButtonEnabled = false;
                 mainWin.OrdersListButtonEnabled = false;
                 mainWin.ClientsByServiceTypeButtonEnabled = false;
             }
-            
+
             if (Order.GetInstallOrdersList().Count == 0)
             {
                 mainWin.InstallOrdersListButtonEnabled = false;
             }
-            
+
             if (Order.GetRepairOrdersList().Count == 0)
             {
                 mainWin.RepairOrdersListButtonEnabled = false;

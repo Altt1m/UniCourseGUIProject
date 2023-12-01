@@ -49,6 +49,7 @@
             ClientSize = new Size(411, 281);
             Controls.Add(listBox_RepairOrders);
             Name = "RepairOrdersList";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RepairOrdersList";
             ResumeLayout(false);
         }

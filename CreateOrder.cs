@@ -108,6 +108,7 @@ namespace Course_Project_GUI
                 else
                 {
                     MessageBox.Show("Термін роботи повинен бути більше нуля.", "Термін роботи", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
             catch
@@ -125,8 +126,8 @@ namespace Course_Project_GUI
                 else
                 {
                     MessageBox.Show("Вартість повинна бути більше нуля.", "Вартість", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                
             }
             catch
             {

@@ -51,6 +51,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "ClientsList";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Клієнти";
             ResumeLayout(false);
         }

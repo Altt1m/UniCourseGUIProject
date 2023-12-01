@@ -49,6 +49,7 @@
             ClientSize = new Size(411, 281);
             Controls.Add(listBox_OrdersToRemove);
             Name = "RemoveOrder";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RemoveOrder";
             ResumeLayout(false);
         }

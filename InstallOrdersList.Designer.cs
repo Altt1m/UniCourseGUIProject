@@ -51,6 +51,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "InstallOrdersList";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "InstallOrdersList";
             ResumeLayout(false);
         }

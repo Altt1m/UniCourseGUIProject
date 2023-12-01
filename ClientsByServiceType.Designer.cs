@@ -56,6 +56,7 @@
             radioButton_Install.TabStop = true;
             radioButton_Install.Text = "Встановлення";
             radioButton_Install.UseVisualStyleBackColor = true;
+            radioButton_Install.CheckedChanged += radioButton_Repair_CheckedChanged;
             // 
             // radioButton_Repair
             // 
@@ -91,6 +92,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "ClientsByServiceType";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ClientsByServiceType";
             ResumeLayout(false);
             PerformLayout();

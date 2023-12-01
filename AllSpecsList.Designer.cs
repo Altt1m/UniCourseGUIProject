@@ -51,6 +51,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "AllSpecsList";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AllSpecsList";
             ResumeLayout(false);
         }

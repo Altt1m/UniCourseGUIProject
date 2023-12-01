@@ -51,6 +51,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "OrdersList";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Всі замовлення";
             ResumeLayout(false);
         }
