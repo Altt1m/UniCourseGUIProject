@@ -1,133 +1,134 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-// АС-221 Мельник Вячеслав
+
 namespace Course_Project_GUI
 {
+    // АС-221 Мельник Вячеслав
     public partial class MainWin : Form
     {
         public MainWin()
         {
             InitializeComponent();
-            LoadData(); // Р—Р°РІР°РЅС‚Р°Р¶РµРЅРЅСЏ РґР°РЅРёС…
-            FormClosing += MainWin_FormClosing; // РћР±СЂРѕР±РєР° Р·Р°РєСЂРёС‚С‚СЏ РІС–РєРЅР°
+            LoadData(); // Завантаження даних
+            FormClosing += MainWin_FormClosing; // Обробка закриття вікна
         }
 
-        // Р—Р°РІР°РЅС‚Р°Р¶РµРЅРЅСЏ С„РѕСЂРјРё
+        // Завантаження форми
         private void MainWin_Load(object sender, EventArgs e)
         {
-            // Р’С–РґРєР»СЋС‡РёС‚Рё С„РѕРєСѓСЃ РґР»СЏ РїРµСЂС€РѕРіРѕ РµР»РµРјРµРЅС‚Р°
+            // Відключити фокус для першого елемента
             button_OpenAddSpec.TabStop = false;
 
-            // Р”РѕРґР°С‚РєРѕРІРѕ РІС–РґРєР»СЋС‡РёРјРѕ С„РѕРєСѓСЃ РґР»СЏ РІСЃС–С… РµР»РµРјРµРЅС‚С–РІ Сѓ С„РѕСЂРјС–
+            // Додатково відключимо фокус для всіх елементів у формі
             foreach (Control control in Controls)
             {
                 control.TabStop = false;
             }
         }
 
-        // Р”РѕРґР°С‚Рё РјР°Р№СЃС‚СЂР°
+        // Додати майстра
         private void button_OpenAddSpec_Click(object sender, EventArgs e)
         {
             AddSpec addSpec = new AddSpec(this);
             addSpec.Show();
         }
 
-        // Р”РѕРґР°С‚Рё РєР»С–С”РЅС‚Р°
+        // Додати клієнта
         private void button_OpenAddClient_Click(object sender, EventArgs e)
         {
             AddClient addClient = new AddClient(this);
             addClient.Show();
         }
 
-        // РЎС‚РІРѕСЂРёС‚Рё Р·Р°РјРѕРІР»РµРЅРЅСЏ
+        // Створити замовлення
         private void button_OpenCreateOrder_Click(object sender, EventArgs e)
         {
             CreateOrder createOrder = new CreateOrder(this);
             createOrder.Show();
         }
-        // РЎС‚РІРѕСЂРёС‚Рё Р·Р°РјРѕРІР»РµРЅРЅСЏ (СЃС‚Р°РЅ)
+        // Створити замовлення (стан)
         public bool OpenCreateOrderButtonEnabled
         {
             get { return button_OpenCreateOrder.Enabled; }
             set { button_OpenCreateOrder.Enabled = value; }
         }
 
-        // РџСЂРёР±СЂР°С‚Рё Р·Р°РјРѕРІР»РµРЅРЅСЏ
+        // Прибрати замовлення
         private void button_OpenRemoveOrder_Click(object sender, EventArgs e)
         {
             RemoveOrder removeOrder = new RemoveOrder(this);
             removeOrder.Show();
         }
-        // РџСЂРёР±СЂР°С‚Рё Р·Р°РјРѕРІР»РµРЅРЅСЏ (СЃС‚Р°РЅ)
+        // Прибрати замовлення (стан)
         public bool OpenRemoveOrderButtonEnabled
         {
             get { return button_OpenRemoveOrder.Enabled; }
             set { button_OpenRemoveOrder.Enabled = value; }
         }
 
-        // РЎРµСЂРµРґРЅСЏ РІР°СЂС‚С–СЃС‚СЊ Р·Р°РјРѕРІР»РµРЅРЅСЏ
+        // Середня вартість замовлення
         public string AverageOrderCostLabelText
         {
             get { return label_AverageOrderCost.Text; }
             set { label_AverageOrderCost.Text = value; }
         }
-        // РћРЅРѕРІРёС‚Рё СЃРµСЂРµРґРЅСЋ РІР°СЂС‚С–СЃС‚СЊ
+        // Оновити середню вартість
         public void UpdateAverageOrderCost()
         {
-            AverageOrderCostLabelText = $"РЎРµСЂРµРґРЅСЏ РІР°СЂС‚С–СЃС‚СЊ Р·Р°РјРѕРІР»РµРЅРЅСЏ: {Order.GetAverageOrderCost()} РіСЂРЅ.";
+            AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()} грн.";
         }
 
-        // РќР°Р№РґРѕРІС€РёР№ С‚РµСЂРјС–РЅ СЂРѕР±РѕС‚Рё
+        // Найдовший термін роботи
         public string LongestWorkPeriodLabelText
         {
             get { return label_LongestWorkPeriod.Text; }
             set { label_LongestWorkPeriod.Text = value; }
         }
-        // РћРЅРѕРІРёС‚Рё РЅР°Р№РґРѕРІС€РёР№ С‚РµСЂРјС–РЅ СЂРѕР±РѕС‚Рё
+        // Оновити найдовший термін роботи
         public void UpdateLongestWorkPeriod()
         {
-            LongestWorkPeriodLabelText = $"РќР°Р№РґРѕРІС€РёР№ С‚РµСЂРјС–РЅ РІРёРєРѕРЅР°РЅРЅСЏ (Сѓ РґРЅСЏС…): {Order.GetLongestWorkPeriod()}";
+            LongestWorkPeriodLabelText = $"Найдовший термін виконання (у днях): {Order.GetLongestWorkPeriod()}";
         }
 
-        // РќР°Р№РґРѕСЂРѕР¶С‡Рµ Р·Р°РјРѕРІР»РµРЅРЅСЏ
+        // Найдорожче замовлення
         public string MostExpensiveOrderLabelText
         {
             get { return label_MostExpensiveOrder.Text; }
             set { label_MostExpensiveOrder.Text = value; }
         }
-        // РћРЅРѕРІРёС‚Рё РЅР°Р№РґРѕСЂРѕР¶С‡Рµ Р·Р°РјРѕРІР»РµРЅРЅСЏ
+        // Оновити найдорожче замовлення
         public void UpdateMostExpensiveOrder()
         {
-            MostExpensiveOrderLabelText = $"РќР°Р№РґРѕСЂРѕР¶С‡Рµ Р·Р°РјРѕРІР»РµРЅРЅСЏ: {Order.GetMostExpensiveOrder().OrderID} " +
-                                                                            $"({Order.GetMostExpensiveOrder().Cost} РіСЂРЅ.)";
+            MostExpensiveOrderLabelText = $"Найдорожче замовлення: {Order.GetMostExpensiveOrder().OrderID} " +
+                                                                            $"({Order.GetMostExpensiveOrder().Cost} грн.)";
         }
 
-        // Р’С–Р»СЊРЅС– РјР°Р№СЃС‚СЂРё
+        // Вільні майстри
         public string AvailableSpecsLabelText
         {
             get { return label_AvailableSpecs.Text; }
             set { label_AvailableSpecs.Text = value; }
         }
-        // РћРЅРѕРІРёС‚Рё РІС–Р»СЊРЅРёС… РјР°Р№СЃС‚СЂС–РІ
+        // Оновити вільних майстрів
         public void UpdateAvailableSpecs()
         {
-            AvailableSpecsLabelText = $"Р’С–Р»СЊРЅС– РјР°Р№СЃС‚СЂРё: {Specialist.GetAvailableSpecsList().Count}";
+            AvailableSpecsLabelText = $"Вільні майстри: {Specialist.GetAvailableSpecsList().Count}";
         }
-        // РљР»С–С”РЅС‚Рё
+        // Клієнти
         public string ClientsLabelText
         {
             get { return label_Clients.Text; }
             set { label_Clients.Text = value; }
         }
 
-        // Р’СЃС– РјР°Р№СЃС‚СЂРё
+        // Всі майстри
         private void button_allspecs_Click(object sender, EventArgs e)
         {
             AllSpecsList allspecsList = new AllSpecsList();
             allspecsList.Show();
         }
-        // Р’СЃС– РјР°Р№СЃС‚СЂРё (СЃС‚Р°РЅ)
+        // Всі майстри (стан)
         public bool AllSpecsButtonEnabled
         {
             get { return button_AllSpecs.Enabled; }
@@ -135,22 +136,22 @@ namespace Course_Project_GUI
         }
 
 
-        // Р’СЃС– РєР»С–С”РЅС‚Рё
+        // Всі клієнти
         private void button_clients_Click(object sender, EventArgs e)
         {
             ClientsList clientsList = new ClientsList();
             clientsList.Show();
         }
-        // Р’СЃС– РєР»С–С”РЅС‚Рё (СЃС‚Р°РЅ)
+        // Всі клієнти (стан)
         public bool ClientsButtonEnabled
         {
-            get { return button_РЎlients.Enabled; }
-            set { button_РЎlients.Enabled = value; }
+            get { return button_Сlients.Enabled; }
+            set { button_Сlients.Enabled = value; }
         }
-        // РћРЅРѕРІРёС‚Рё РєР»С–С”РЅС‚С–РІ
+        // Оновити клієнтів
         public void UpdateClients()
         {
-            ClientsLabelText = $"РљР»С–С”РЅС‚Рё: {Client.GetClientsList().Count}";
+            ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
         }
 
         private void button_ClientsByServiceType_Click(object sender, EventArgs e)
@@ -158,7 +159,7 @@ namespace Course_Project_GUI
             ClientsByServiceType clientsByServiceType = new ClientsByServiceType();
             clientsByServiceType.Show();
         }
-        // РљР»С–С”РЅС‚Рё Р·Р° С‚РёРїРѕРј РїРѕСЃР»СѓРіРё (СЃС‚Р°РЅ)
+        // Клієнти за типом послуги (стан)
         public bool ClientsByServiceTypeButtonEnabled
         {
             get { return button_ClientsByServiceType.Enabled; }
@@ -167,39 +168,39 @@ namespace Course_Project_GUI
 
 
 
-        // Р’СЃС– Р·Р°РјРѕРІР»РµРЅРЅСЏ
+        // Всі замовлення
         private void button_OrdersList_Click(object sender, EventArgs e)
         {
             OrdersList ordersList = new OrdersList();
             ordersList.Show();
         }
-        // Р’СЃС– Р·Р°РјРѕРІР»РµРЅРЅСЏ (СЃС‚Р°РЅ)
+        // Всі замовлення (стан)
         public bool OrdersListButtonEnabled
         {
             get { return button_OrdersList.Enabled; }
             set { button_OrdersList.Enabled = value; }
         }
 
-        // Р—Р°РјРѕРІР»РµРЅРЅСЏ РЅР° РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ
+        // Замовлення на встановлення
         private void button_InstallOrdersList_Click(object sender, EventArgs e)
         {
             InstallOrdersList installOrdersList = new InstallOrdersList();
             installOrdersList.Show();
         }
-        // Р—Р°РјРѕРІР»РµРЅРЅСЏ РЅР° РІСЃС‚Р°РЅРѕРІР»РµРЅРЅСЏ (СЃС‚Р°РЅ)
+        // Замовлення на встановлення (стан)
         public bool InstallOrdersListButtonEnabled
         {
             get { return button_InstallOrdersList.Enabled; }
             set { button_InstallOrdersList.Enabled = value; }
         }
 
-        // Р—Р°РјРѕРІР»РµРЅРЅСЏ РЅР° СЂРµРјРѕРЅС‚
+        // Замовлення на ремонт
         private void button_RepairOrdersList_Click(object sender, EventArgs e)
         {
             RepairOrdersList repairOrdersList = new RepairOrdersList();
             repairOrdersList.Show();
         }
-        // Р—Р°РјРѕРІР»РµРЅРЅСЏ РЅР° СЂРµРјРѕРЅС‚ (СЃС‚Р°РЅ)
+        // Замовлення на ремонт (стан)
         public bool RepairOrdersListButtonEnabled
         {
             get { return button_RepairOrdersList.Enabled; }
@@ -207,23 +208,23 @@ namespace Course_Project_GUI
         }
 
 
-        // Р—Р°РєСЂРёС‚С‚СЏ С„РѕСЂРјРё
+        // Закриття форми
         private void MainWin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Specialist.SpecsCreated > 0 || Client.ClientsCreated > 0 || Order.OrdersCreated > 0 || Order.OrdersRemoved > 0)
             {
-                // РџРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё РєРѕСЂРёСЃС‚СѓРІР°С‡ Р±Р°Р¶Р°С” Р·Р±РµСЂРµРіС‚Рё РґР°РЅС–
-                DialogResult result = MessageBox.Show("Р‘Р°Р¶Р°С”С‚Рµ Р·Р±РµСЂРµРіС‚Рё Р·РјС–РЅРё РїРµСЂРµРґ Р·Р°РєСЂРёС‚С‚СЏРј?", "Р—Р±РµСЂРµР¶РµРЅРЅСЏ Р·РјС–РЅ",
+                // Перевіряємо, чи користувач бажає зберегти дані
+                DialogResult result = MessageBox.Show("Бажаєте зберегти зміни перед закриттям?", "Збереження змін",
                                                       MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    // Р—Р±РµСЂС–РіР°С”РјРѕ РґР°РЅС– РїРµСЂРµРґ Р·Р°РєСЂРёС‚С‚СЏРј
+                    // Зберігаємо дані перед закриттям
                     SaveData();
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    // РЎРєР°СЃРѕРІСѓС”РјРѕ Р·Р°РєСЂРёС‚С‚СЏ С„РѕСЂРјРё
+                    // Скасовуємо закриття форми
                     e.Cancel = true;
                 }
 
@@ -231,13 +232,13 @@ namespace Course_Project_GUI
 
         }
 
-        // Р—Р±РµСЂРµР¶РµРЅРЅСЏ РґР°РЅРёС…
+        // Збереження даних
         private void SaveData()
         {
-            // Р§Рё С–СЃРЅСѓС” РїР°РїРєР°
+            // Чи існує папка
             if (!Directory.Exists("Files"))
             {
-                // РЎС‚РІРѕСЂРµРЅРЅСЏ РїР°РїРєРё, СЏРєС‰Рѕ РІРѕРЅР° РЅРµ С–СЃРЅСѓС”
+                // Створення папки, якщо вона не існує
                 Directory.CreateDirectory("Files");
             }
 
@@ -264,10 +265,10 @@ namespace Course_Project_GUI
             File.WriteAllText("Files\\repairOrdersList.json", json);
         }
 
-        // Р—Р°РІР°РЅС‚Р°Р¶РµРЅРЅСЏ РґР°РЅРёС…
+        // Завантаження даних
         private void LoadData()
         {
-            // Р§Рё С–СЃРЅСѓС” РїР°РїРєР°
+            // Чи існує папка
             if (!Directory.Exists("Files"))
             {
                 return;
@@ -292,11 +293,11 @@ namespace Course_Project_GUI
                 Specialist.SetAvailableSpecsList(avalSpecs);
                 if (Specialist.GetAvailableSpecsList().Any())
                 {
-                    AvailableSpecsLabelText = $"Р’С–Р»СЊРЅС– РјР°Р№СЃС‚СЂРё: {Specialist.GetAvailableSpecsList().Count}";
+                    AvailableSpecsLabelText = $"Вільні майстри: {Specialist.GetAvailableSpecsList().Count}";
                 }
                 else
                 {
-                    AvailableSpecsLabelText = "Р’С–Р»СЊРЅС– РјР°Р№СЃС‚СЂРё: 0";
+                    AvailableSpecsLabelText = "Вільні майстри: 0";
                 }
 
             }
@@ -309,7 +310,7 @@ namespace Course_Project_GUI
                 if (Client.GetClientsList().Any())
                 {
                     ClientsButtonEnabled = true;
-                    ClientsLabelText = $"РљР»С–С”РЅС‚Рё: {Client.GetClientsList().Count}";
+                    ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
                     if (Specialist.GetAvailableSpecsList().Any())
                     {
                         OpenCreateOrderButtonEnabled = true;
