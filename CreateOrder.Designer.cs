@@ -175,7 +175,7 @@
             button_createorder.BackColor = Color.DarkGray;
             button_createorder.FlatStyle = FlatStyle.Flat;
             button_createorder.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_createorder.Location = new Point(161, 361);
+            button_createorder.Location = new Point(164, 363);
             button_createorder.Name = "button_createorder";
             button_createorder.Size = new Size(91, 30);
             button_createorder.TabIndex = 7;

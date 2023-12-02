@@ -12,17 +12,18 @@ namespace Course_Project_GUI
 {
     public partial class AllSpecsList : Form
     {
-        private List<Specialist> allspecs = Specialist.GetAllSpecsList();
+        private List<Specialist> allspecs = Specialist.GetAllSpecsList(); // Всі майстри
         public AllSpecsList()
         {
             InitializeComponent();
 
-            for (int i = 0; i < allspecs.Count; i++)
+            for (int i = 0; i < allspecs.Count; i++) // Заповнення listBox
             {
                 listBox_AllSpecs.Items.Add($"№{i + 1}. {allspecs[i].FullName}");
             }
         }
 
+        // Подвійне натискання миші по об'єкту
         private void listBox_AllSpecs_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int i = listBox_AllSpecs.IndexFromPoint(e.Location);

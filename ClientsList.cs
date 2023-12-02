@@ -12,22 +12,28 @@ namespace Course_Project_GUI
 {
     public partial class ClientsList : Form
     {
+        // Список клієнтів, отриманий з методу GetClientsList
         List<Client> clients = Client.GetClientsList();
+
         public ClientsList()
         {
             InitializeComponent();
 
+            // Ініціалізація елементів форми при створенні
             for (int i = 0; i < clients.Count; i++)
             {
+                // Додавання елементів у listBox для кожного клієнта
                 listBox_Clients.Items.Add($"№{i + 1}. {clients[i].FullName}");
             }
         }
 
         private void listBox_Clients_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            // Обробник події подвійного кліку мишею на listBox
             int i = listBox_Clients.IndexFromPoint(e.Location);
             if (i != ListBox.NoMatches)
             {
+                // Отримання вибраного клієнта та виведення інформації
                 Client selectedClient = clients[i];
                 MessageBox.Show($"№{i + 1}\n" +
                     $"ПІБ: {selectedClient.FullName}\n" +
@@ -38,5 +44,4 @@ namespace Course_Project_GUI
             }
         }
     }
-
 }

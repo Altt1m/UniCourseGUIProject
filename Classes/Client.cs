@@ -2,8 +2,6 @@
 {
     // На одного клієнта може приходитися багато замовлень, але на замовлення лише один клієнт
     public string Address { get; set; } // Адреса
-    //public string OrderID { get; set; } // ID замовлення
-
     public static int ClientsCreated { get; set; } = 0;
 
     private List<Order> orders = new List<Order>(); // Список замовлень клієнта
@@ -12,12 +10,6 @@
 
     public Client() { }
 
-    /// <summary>
-    /// Конструктор з параметрами
-    /// </summary>
-    /// <param name="fN">ПІБ</param>
-    /// <param name="pNum">Номер телефону</param>
-    /// <param name="addr">Адреса</param>
     public Client(string fN, string pN, string addr)
     {
         FullName = fN;
@@ -28,39 +20,33 @@
         ClientsCreated++;
     }
 
-    /// <summary>
-    /// Повертає список клієнтів
-    /// </summary>
-    /// <returns>Список клієнтів</returns>
+    // Список клієнтів
     public static List<Client> GetClientsList()
     {
         return clients;
     }
-
     public static void SetClientsList(List<Client> clientsList)
     {
         clients = clientsList;
     }
-
-    /// <summary>
-    /// Додавання замовлення до списку клієнта
-    /// </summary>
-    /// <param name="order">Замовлення клієнта</param>
+    
+    // Додати замовлення клієнту
     public void AddOrder(Order order)
     {
         orders.Add(order);
     }
-
+    // Прибрати замовлення у клієнта
     public void RemoveOrder(Order order)
     {
         orders.Remove(order);
     }
-
+    // Список замовлень
     public List<Order> GetOrdersList()
     {
         return orders;
     }
 
+    // Вивести список замовлень
     public string GetOrders()
     {
         if (!orders.Any())

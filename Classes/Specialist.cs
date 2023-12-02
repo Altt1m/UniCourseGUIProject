@@ -4,19 +4,13 @@ using System;
 public class Specialist : Person // Майстер (наслідування від Person)
 {
     public string BranchName { get; set; } // Назва філіалу
-    public bool IsFree { get; set; } = true;
-    public static int SpecsCreated { get; set; } = 0;
-    public string OrderID { get; set; } = "N/A";
+    public bool IsFree { get; set; } = true; // Чи вільний
+    public static int SpecsCreated { get; set; } = 0; // Майстрів створено (за сесію)
+    public string OrderID { get; set; } = "N/A"; // ID замовлення
 
-    private static List<Specialist> availableSpecs = new List<Specialist>(); // Статичний список майстрів
-    private static List<Specialist> allSpecs = new List<Specialist>();
+    private static List<Specialist> availableSpecs = new List<Specialist>(); // Статичний список вільних майстрів
+    private static List<Specialist> allSpecs = new List<Specialist>(); // Всі майстри
 
-    /// <summary>
-    /// Конструктор з параметрами
-    /// </summary>
-    /// <param name="fN">ПІБ</param>
-    /// <param name="pNum">Номер телефону</param>
-    /// <param name="bN">Назва філіалу</param>
     public Specialist(string fN, string pNum, string bN)
     {
         FullName = fN;
@@ -31,39 +25,13 @@ public class Specialist : Person // Майстер (наслідування в�
 
     public Specialist() { }
 
+    // Додати вільного майстра
     public static void AddAvailableSpec(Specialist spec)
     {
         availableSpecs.Add(spec);
     }
-
-    /// <summary>
-    /// Повертає список доступних майстрів
-    /// </summary>
-    /// <returns>Список вільних майстрів</returns>
-    public static List<Specialist> GetAvailableSpecsList()
-    {
-        return availableSpecs;
-    }
-
-    public static void SetAvailableSpecsList(List<Specialist> avalSpecs)
-    {
-        availableSpecs = avalSpecs;
-    }
-
-    public static List<Specialist> GetAllSpecsList()
-    {
-        return allSpecs;
-    }
-
-    public static void SetAllSpecsList(List<Specialist> specs)
-    {
-        allSpecs = specs;
-    }
-
-    /// <summary>
-    /// Видаляє майстра зі списку доступних
-    /// </summary>
-    public void RemoveFromSpecsList()
+    // Видалити майстра зі списку
+    public void RemoveFromAvailableSpecsList()
     {
         if (availableSpecs.Contains(this))
         {
@@ -71,13 +39,24 @@ public class Specialist : Person // Майстер (наслідування в�
         }
     }
 
-    /// <summary>
-    /// Приписує майстру замовлення
-    /// </summary>
-    /// <param name="order">Приписуване замовлення</param>
-    //public void SetAssignedOrder(Order order)
-    //{
-    //    assignedOrder = order;
-    //}
+    // Список вільних майстрів
+    public static List<Specialist> GetAvailableSpecsList()
+    {
+        return availableSpecs;
+    }
+    public static void SetAvailableSpecsList(List<Specialist> avalSpecs)
+    {
+        availableSpecs = avalSpecs;
+    }
+
+    // Список всіх майстрів
+    public static List<Specialist> GetAllSpecsList()
+    {
+        return allSpecs;
+    }
+    public static void SetAllSpecsList(List<Specialist> specs)
+    {
+        allSpecs = specs;
+    }
 
 }

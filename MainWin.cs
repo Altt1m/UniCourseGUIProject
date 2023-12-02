@@ -9,10 +9,11 @@ namespace Course_Project_GUI
         public MainWin()
         {
             InitializeComponent();
-            LoadData();
-            FormClosing += MainWin_FormClosing;
+            LoadData(); // Завантаження даних
+            FormClosing += MainWin_FormClosing; // Обробка закриття вікна
         }
 
+        // Завантаження форми
         private void MainWin_Load(object sender, EventArgs e)
         {
             // Відключити фокус для першого елемента
@@ -25,143 +26,131 @@ namespace Course_Project_GUI
             }
         }
 
+        // Додати майстра
         private void button_OpenAddSpec_Click(object sender, EventArgs e)
         {
             AddSpec addSpec = new AddSpec(this);
             addSpec.Show();
         }
 
+        // Додати клієнта
         private void button_OpenAddClient_Click(object sender, EventArgs e)
         {
             AddClient addClient = new AddClient(this);
             addClient.Show();
         }
 
+        // Створити замовлення
         private void button_OpenCreateOrder_Click(object sender, EventArgs e)
         {
             CreateOrder createOrder = new CreateOrder(this);
             createOrder.Show();
         }
-
-        private void button_OpenRemoveOrder_Click(object sender, EventArgs e)
-        {
-            RemoveOrder removeOrder = new RemoveOrder(this);
-            removeOrder.Show();
-        }
-
-        public string AverageOrderCostLabelText
-        {
-            get { return label_AverageOrderCost.Text; }
-            set { label_AverageOrderCost.Text = value; }
-        }
-
-        public void UpdateAverageOrderCost()
-        {
-            AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()} грн.";
-        }
-
-        public string LongestWorkPeriodLabelText
-        {
-            get { return label_LongestWorkPeriod.Text; }
-            set { label_LongestWorkPeriod.Text = value; }
-        }
-        public void UpdateLongestWorkPeriod()
-        {
-            LongestWorkPeriodLabelText = $"Найдовший термін виконання (у днях): {Order.GetLongestWorkPeriod()}";
-        }
-
-        public string MostExpensiveOrderLabelText
-        {
-            get { return label_MostExpensiveOrder.Text; }
-            set { label_MostExpensiveOrder.Text = value; }
-        }
-
-        public void UpdateMostExpensiveOrder()
-        {
-            MostExpensiveOrderLabelText = $"Найдорожче замовлення: {Order.GetMostExpensiveOrder().OrderID} " +
-                                                                            $"({Order.GetMostExpensiveOrder().Cost} грн.)";
-        }
-
-        public string AvailableSpecsLabelText
-        {
-            get { return label_AvailableSpecs.Text; }
-            set { label_AvailableSpecs.Text = value; }
-        }
-
-        public void UpdateAvailableSpecs()
-        {
-            AvailableSpecsLabelText = $"Вільні майстри: {Specialist.GetAvailableSpecsList().Count}";
-        }
-
-        public bool AllSpecsButtonEnabled
-        {
-            get { return button_AllSpecs.Enabled; }
-            set { button_AllSpecs.Enabled = value; }
-        }
-
-        public string ClientsLabelText
-        {
-            get { return label_Clients.Text; }
-            set { label_Clients.Text = value; }
-        }
-
-        public void UpdateClients()
-        {
-            ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
-        }
-
-        public bool ClientsButtonEnabled
-        {
-            get { return button_Сlients.Enabled; }
-            set { button_Сlients.Enabled = value; }
-        }
-
-        public bool ClientsByServiceTypeButtonEnabled
-        {
-            get { return button_ClientsByServiceType.Enabled; }
-            set { button_ClientsByServiceType.Enabled = value; }
-        }
-
+        // Створити замовлення (стан)
         public bool OpenCreateOrderButtonEnabled
         {
             get { return button_OpenCreateOrder.Enabled; }
             set { button_OpenCreateOrder.Enabled = value; }
         }
 
+        // Прибрати замовлення
+        private void button_OpenRemoveOrder_Click(object sender, EventArgs e)
+        {
+            RemoveOrder removeOrder = new RemoveOrder(this);
+            removeOrder.Show();
+        }
+        // Прибрати замовлення (стан)
         public bool OpenRemoveOrderButtonEnabled
         {
             get { return button_OpenRemoveOrder.Enabled; }
             set { button_OpenRemoveOrder.Enabled = value; }
         }
 
-        public bool OrdersListButtonEnabled
+        // Середня вартість замовлення
+        public string AverageOrderCostLabelText
         {
-            get { return button_OrdersList.Enabled; }
-            set { button_OrdersList.Enabled = value; }
+            get { return label_AverageOrderCost.Text; }
+            set { label_AverageOrderCost.Text = value; }
+        }
+        // Оновити середню вартість
+        public void UpdateAverageOrderCost()
+        {
+            AverageOrderCostLabelText = $"Середня вартість замовлення: {Order.GetAverageOrderCost()} грн.";
         }
 
-        public bool InstallOrdersListButtonEnabled
+        // Найдовший термін роботи
+        public string LongestWorkPeriodLabelText
         {
-            get { return button_InstallOrdersList.Enabled; }
-            set { button_InstallOrdersList.Enabled = value; }
+            get { return label_LongestWorkPeriod.Text; }
+            set { label_LongestWorkPeriod.Text = value; }
+        }
+        // Оновити найдовший термін роботи
+        public void UpdateLongestWorkPeriod()
+        {
+            LongestWorkPeriodLabelText = $"Найдовший термін виконання (у днях): {Order.GetLongestWorkPeriod()}";
         }
 
-        public bool RepairOrdersListButtonEnabled
+        // Найдорожче замовлення
+        public string MostExpensiveOrderLabelText
         {
-            get { return button_RepairOrdersList.Enabled; }
-            set { button_RepairOrdersList.Enabled = value; }
+            get { return label_MostExpensiveOrder.Text; }
+            set { label_MostExpensiveOrder.Text = value; }
+        }
+        // Оновити найдорожче замовлення
+        public void UpdateMostExpensiveOrder()
+        {
+            MostExpensiveOrderLabelText = $"Найдорожче замовлення: {Order.GetMostExpensiveOrder().OrderID} " +
+                                                                            $"({Order.GetMostExpensiveOrder().Cost} грн.)";
         }
 
-        private void button_InstallOrdersList_Click(object sender, EventArgs e)
+        // Вільні майстри
+        public string AvailableSpecsLabelText
         {
-            InstallOrdersList installOrdersList = new InstallOrdersList();
-            installOrdersList.Show();
+            get { return label_AvailableSpecs.Text; }
+            set { label_AvailableSpecs.Text = value; }
+        }
+        // Оновити вільних майстрів
+        public void UpdateAvailableSpecs()
+        {
+            AvailableSpecsLabelText = $"Вільні майстри: {Specialist.GetAvailableSpecsList().Count}";
+        }
+        // Клієнти
+        public string ClientsLabelText
+        {
+            get { return label_Clients.Text; }
+            set { label_Clients.Text = value; }
         }
 
-        private void button_RepairOrdersList_Click(object sender, EventArgs e)
+        // Всі майстри
+        private void button_allspecs_Click(object sender, EventArgs e)
         {
-            RepairOrdersList repairOrdersList = new RepairOrdersList();
-            repairOrdersList.Show();
+            AllSpecsList allspecsList = new AllSpecsList();
+            allspecsList.Show();
+        }
+        // Всі майстри (стан)
+        public bool AllSpecsButtonEnabled
+        {
+            get { return button_AllSpecs.Enabled; }
+            set { button_AllSpecs.Enabled = value; }
+        }
+
+
+        // Всі клієнти
+        private void button_clients_Click(object sender, EventArgs e)
+        {
+            ClientsList clientsList = new ClientsList();
+            clientsList.Show();
+        }
+        // Всі клієнти (стан)
+        public bool ClientsButtonEnabled
+        {
+            get { return button_Сlients.Enabled; }
+            set { button_Сlients.Enabled = value; }
+        }
+        // Оновити клієнтів
+        public void UpdateClients()
+        {
+            ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
         }
 
         private void button_ClientsByServiceType_Click(object sender, EventArgs e)
@@ -169,24 +158,56 @@ namespace Course_Project_GUI
             ClientsByServiceType clientsByServiceType = new ClientsByServiceType();
             clientsByServiceType.Show();
         }
-
-        private void button_allspecs_Click(object sender, EventArgs e)
+        // Клієнти за типом послуги (стан)
+        public bool ClientsByServiceTypeButtonEnabled
         {
-            AllSpecsList allspecsList = new AllSpecsList();
-            allspecsList.Show();
-        }
-        private void button_clients_Click(object sender, EventArgs e)
-        {
-            ClientsList clientsList = new ClientsList();
-            clientsList.Show();
+            get { return button_ClientsByServiceType.Enabled; }
+            set { button_ClientsByServiceType.Enabled = value; }
         }
 
+
+
+        // Всі замовлення
         private void button_OrdersList_Click(object sender, EventArgs e)
         {
             OrdersList ordersList = new OrdersList();
             ordersList.Show();
         }
+        // Всі замовлення (стан)
+        public bool OrdersListButtonEnabled
+        {
+            get { return button_OrdersList.Enabled; }
+            set { button_OrdersList.Enabled = value; }
+        }
 
+        // Замовлення на встановлення
+        private void button_InstallOrdersList_Click(object sender, EventArgs e)
+        {
+            InstallOrdersList installOrdersList = new InstallOrdersList();
+            installOrdersList.Show();
+        }
+        // Замовлення на встановлення (стан)
+        public bool InstallOrdersListButtonEnabled
+        {
+            get { return button_InstallOrdersList.Enabled; }
+            set { button_InstallOrdersList.Enabled = value; }
+        }
+
+        // Замовлення на ремонт
+        private void button_RepairOrdersList_Click(object sender, EventArgs e)
+        {
+            RepairOrdersList repairOrdersList = new RepairOrdersList();
+            repairOrdersList.Show();
+        }
+        // Замовлення на ремонт (стан)
+        public bool RepairOrdersListButtonEnabled
+        {
+            get { return button_RepairOrdersList.Enabled; }
+            set { button_RepairOrdersList.Enabled = value; }
+        }
+
+
+        // Закриття форми
         private void MainWin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Specialist.SpecsCreated > 0 || Client.ClientsCreated > 0 || Order.OrdersCreated > 0 || Order.OrdersRemoved > 0)
@@ -210,8 +231,10 @@ namespace Course_Project_GUI
 
         }
 
+        // Збереження даних
         private void SaveData()
         {
+            // Чи існує папка
             if (!Directory.Exists("Files"))
             {
                 // Створення папки, якщо вона не існує
@@ -241,8 +264,15 @@ namespace Course_Project_GUI
             File.WriteAllText("Files\\repairOrdersList.json", json);
         }
 
+        // Завантаження даних
         private void LoadData()
         {
+            // Чи існує папка
+            if (!Directory.Exists("Files"))
+            {
+                return;
+            }
+
             if (File.Exists("Files\\specsList.json"))
             {
                 string json = File.ReadAllText("Files\\specsList.json");
@@ -280,6 +310,10 @@ namespace Course_Project_GUI
                 {
                     ClientsButtonEnabled = true;
                     ClientsLabelText = $"Клієнти: {Client.GetClientsList().Count}";
+                    if (Specialist.GetAvailableSpecsList().Any())
+                    {
+                        OpenCreateOrderButtonEnabled = true;
+                    }
                 }
 
             }

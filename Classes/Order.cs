@@ -7,35 +7,39 @@
     public string DateOfStart { get; set; } // Дата початку роботи
     public int WorkPeriod { get; set; } // Термін роботи (у днях)
     public double Cost { get; set; } // Вартість
-    public string OrderID { get; set; } // ID замовлення *(у клієнта)
+    public string OrderID { get; set; } // ID замовлення
 
     public static int OrderAmount { get; set; } = 0; // Номер замовлення (потім використовується)
-    public static int OrdersCreated { get; set; } = 0;
-    public static int OrdersRemoved { get; set; } = 0;
+    public static int OrdersCreated { get; set; } = 0; // Замовлень створено (за сесію)
+    public static int OrdersRemoved { get; set; } = 0; // Замовлень прибрано (за сесію)
 
     private static List<Order> orders = new List<Order>(); // Список всіх замовлень
     private static List<Order> repairOrders = new List<Order>(); // Список замовлень на ремонт
     private static List<Order> installOrders = new List<Order>(); // Список замовлень на встановлення
 
     // Композиція
-    public Specialist MainSpecialist { get; set; } // Головний майстер
+    public Specialist MainSpecialist { get; set; } // Призначений майстер
     public Client ClientInfo { get; set; } // Інформація про клієнта (зокрема адреса)
 
    
     public Order(Specialist spec, Client client, string serviceType, string dName, string dVendor, string dos, int wPeriod, double cost) // Конструктор
     {
+        // ID замовлення
         OrderAmount++;
         OrderID = "ORD" + OrderAmount;
 
+        // Майстер
         spec.IsFree = false;
-        spec.RemoveFromSpecsList();
+        spec.RemoveFromAvailableSpecsList();
         spec.OrderID = OrderID;
         MainSpecialist = spec;
 
+        // Клієнт і адреса
         ClientInfo = client;
         Address = ClientInfo.Address; // Адреса замовлення береться з адреси клієнта
         client.AddOrder(this);
 
+        // Тип послуги
         ServiceType = serviceType;
         if (ServiceType == "Встановлення")
         {
@@ -46,98 +50,65 @@
             repairOrders.Add(this); // Якщо замовлення на ремонт
         }
 
+        // Все інше
         DeviceName = dName;
         DeviceVendor = dVendor;
         DateOfStart = dos;
         WorkPeriod = wPeriod;
         Cost = cost;
 
+        // Повідомлення
         MessageBox.Show($"Замовлення {OrderID} успішно створено.", "Створено замовлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        orders.Add(this);
+        orders.Add(this); // Додавання до списку всіх замовлень
         OrdersCreated++;
     }
 
     public Order() { }
 
-    /// <summary>
-    /// Повератє список замовлень
-    /// </summary>
-    /// <returns>Список замовлень</returns>
+    // Список всіх замовлень
     public static List<Order> GetOrdersList()
     {
         return orders;
     }
-
     public static void SetOrdersList(List<Order> ordersList)
     {
         orders = ordersList;
     }
 
-    /// <summary>
-    /// 1. Список пристроїв для ремонту
-    /// </summary>
-    /// <returns>Список пристроїв на ремонт</returns>
+    // Список замовлень на ремонт
     public static List<Order> GetRepairOrdersList()
     {
         return repairOrders;
     }
-
     public static void SetRepairOrdersList(List<Order> repairOrdersList)
     {
         repairOrders = repairOrdersList;
     }
 
-    /// <summary>
-    /// 2. Список пристроїв для встановлення
-    /// </summary>
-    /// <returns>Список замовлень на встановлення</returns>
+    // Список замовлень на встановлення
     public static List<Order> GetInstallOrdersList()
     {
         return installOrders;
     }
-
     public static void SetInstallOrdersList(List<Order> installOrdersList)
     {
         installOrders = installOrdersList;
     }
 
-    /// <summary>
-    /// 3. Список клієнтів, які вибрали певний тип послуги
-    /// </summary>
-    /// <param name="serviceType">Тип послуги</param>
-    /// <returns>Список клієнтів, які обрали певний тип послуги</returns>
-    public static List<Client> GetClientsByServiceType(string serviceType)
-    {
-        return orders
-            .Where(order => order.ServiceType == serviceType)
-            .Select(order => order.ClientInfo)
-            .Distinct() // Щоб уникнути дублікатів клієнтів
-            .ToList();
-    }
-
-    /// <summary>
-    /// 4. Середня вартість замовлень
-    /// </summary>
-    /// <returns>Середня вартість замовлень</returns>
+    // Середня вартість замовлень
     public static double GetAverageOrderCost()
     {
         return orders.Average(o => o.Cost);
     }
 
-    /// <summary>
-    /// 5. Найдовший термін виконання роботи
-    /// </summary>
-    /// <returns>Найдовший термін виконання роботи</returns>
+    // Найдовший термін виконання
     public static int GetLongestWorkPeriod()
     {
         return orders.OrderByDescending(o => o.WorkPeriod).First().WorkPeriod;
     }
 
-    /// <summary>
-    /// 6. Найдорожче замовлення
-    /// </summary>
-    /// <returns>Об'єкт класу Order з найбільшим Cost</returns>
+    // Найдорожче замовлення
     public static Order GetMostExpensiveOrder()
     {
         return orders.OrderByDescending(o => o.Cost).First();

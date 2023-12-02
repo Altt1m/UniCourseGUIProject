@@ -12,11 +12,15 @@ namespace Course_Project_GUI
 {
     public partial class InstallOrdersList : Form
     {
+        // Список замовлень на встановлення
         private List<Order> installOrders = Order.GetInstallOrdersList();
+
+        // Конструктор форми
         public InstallOrdersList()
         {
             InitializeComponent();
 
+            // Додавання замовлень у ListBox
             for (int i = 0; i < installOrders.Count; i++)
             {
                 listBox_InstallOrders.Items.Add($"№{i + 1}. ID: {installOrders[i].OrderID}. " +
@@ -24,12 +28,16 @@ namespace Course_Project_GUI
             }
         }
 
+        // Подвійний клік на замовленні
         private void listBox_InstallOrders_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int i = listBox_InstallOrders.IndexFromPoint(e.Location);
             if (i != ListBox.NoMatches)
             {
+                // Отримання обраного замовлення
                 Order selectedOrder = installOrders[i];
+
+                // Виведення інформації про замовлення у MessageBox
                 MessageBox.Show($"№{i + 1}\n" +
                     $"ID: {selectedOrder.OrderID}\n" +
                     $"Майстер: {selectedOrder.MainSpecialist.FullName}\n" +

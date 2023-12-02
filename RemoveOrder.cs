@@ -12,16 +12,23 @@ namespace Course_Project_GUI
 {
     public partial class RemoveOrder : Form
     {
+        // Список всіх замовлень
         private List<Order> orders = Order.GetOrdersList();
+
+        // Змінна для збереження посилання на головне вікно
         MainWin mainWin;
+
+        // Конструктор форми
         public RemoveOrder(MainWin mainWin)
         {
             InitializeComponent();
             this.mainWin = mainWin;
 
+            // Оновлення ListBox
             UpdateListBox();
         }
 
+        // Метод для оновлення елементів ListBox
         private void UpdateListBox()
         {
             listBox_OrdersToRemove.Items.Clear(); // Очищення елементів ListBox
@@ -33,12 +40,15 @@ namespace Course_Project_GUI
             }
         }
 
+        // Подвійний клік на елементі ListBox
         private void listBox_OrdersToRemove_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int i = listBox_OrdersToRemove.IndexFromPoint(e.Location);
             if (i != ListBox.NoMatches)
             {
                 Order selectedOrder = orders[i];
+
+                // Виведення підтвердження видалення
                 DialogResult result = MessageBox.Show($"№{i + 1}\n" +
                     $"ID: {selectedOrder.OrderID}\n" +
                     $"Майстер: {selectedOrder.MainSpecialist.FullName}\n" +
@@ -50,12 +60,16 @@ namespace Course_Project_GUI
                     $"Дата початку: {selectedOrder.DateOfStart}\n" +
                     $"Термін роботи (у днях): {selectedOrder.WorkPeriod}\n" +
                     $"Вартість: {selectedOrder.Cost} грн.\n",
-                    "Прибрати замовлення?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    "Видалити замовлення?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
                     // Код для обробки натискання на Yes
+
+                    // Додавання майстра назад до вільних
                     Specialist.AddAvailableSpec(selectedOrder.MainSpecialist);
+
+                    // Зміна статусу майстра на вільний
                     List<Specialist> allSpecs = Specialist.GetAllSpecsList();
                     for (i = 0; i < allSpecs.Count; i++)
                     {
@@ -65,8 +79,11 @@ namespace Course_Project_GUI
                             break;
                         }
                     }
+
+                    // Зміни в головному вікні
                     mainWin.OpenCreateOrderButtonEnabled = true;
 
+                    // Видалення замовлення із списків
                     bool removed = false;
                     foreach (Client client in Client.GetClientsList())
                     {
@@ -101,12 +118,14 @@ namespace Course_Project_GUI
                         }
                     }
 
+                    // Збільшення лічильника видалених замовлень
                     Order.OrdersRemoved++;
 
                     // Оновлення відображення ListBox або інших елементів
                     UpdateListBox();
                     mainWin.UpdateAvailableSpecs();
 
+                    // Перевірка чи є ще замовлення
                     if (orders.Any())
                     {
                         mainWin.UpdateAverageOrderCost();
@@ -119,10 +138,10 @@ namespace Course_Project_GUI
                         mainWin.LongestWorkPeriodLabelText = "Найдовший термін виконання (у днях): N/A";
                         mainWin.MostExpensiveOrderLabelText = "Найдорожче замовлення: N/A";
                     }
-
                 }
             }
 
+            // Деактивація кнопок у головному вікні, якщо більше немає замовлень
             if (!orders.Any())
             {
                 mainWin.OpenRemoveOrderButtonEnabled = false;
@@ -130,6 +149,7 @@ namespace Course_Project_GUI
                 mainWin.ClientsByServiceTypeButtonEnabled = false;
             }
 
+            // Деактивація кнопок для окремих типів замовлень, якщо їх немає
             if (Order.GetInstallOrdersList().Count == 0)
             {
                 mainWin.InstallOrdersListButtonEnabled = false;
@@ -139,7 +159,6 @@ namespace Course_Project_GUI
             {
                 mainWin.RepairOrdersListButtonEnabled = false;
             }
-
         }
     }
 }
