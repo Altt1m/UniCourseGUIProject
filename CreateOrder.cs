@@ -66,7 +66,39 @@ namespace Course_Project_GUI
                 MessageBox.Show("Назва прибору повинна містити від 3 до 20 символів.", "Назва прибору", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            // ... аналогічно для інших полів ...
+
+            else if (string.IsNullOrWhiteSpace(textBox_DeviceVendor.Text))
+            {
+                MessageBox.Show("Виробник прибору відсутній або введений некоректно.", "Виробник пробору", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_DeviceVendor.Text.Length < 3 || textBox_DeviceVendor.Text.Length > 15)
+            {
+                MessageBox.Show("Назва виробника повинна мати від 3 до 15 символів.", "Виробник прибору", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (string.IsNullOrWhiteSpace(textBox_WorkPeriod.Text))
+            {
+                MessageBox.Show("Термін роботи відсутній або введений некоректно.", "Термін роботи", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_WorkPeriod.Text.Length > 2)
+            {
+                MessageBox.Show("Максимальний термін роботи 99 днів.", "Термін роботи", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (string.IsNullOrWhiteSpace(textBox_Cost.Text))
+            {
+                MessageBox.Show("Вартість відсутня або введена некоректно.", "Вартість", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox_Cost.Text.Length > 5) // 99999
+            {
+                MessageBox.Show("Максимальна вартість 99999 грн.", "Вартість", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Отримання значень текстових полів
             string dName = textBox_DeviceName.Text;
